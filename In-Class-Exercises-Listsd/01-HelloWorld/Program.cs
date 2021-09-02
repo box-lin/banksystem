@@ -58,20 +58,20 @@ namespace _01_HelloWorld
                     Console.WriteLine("<<<<<<<< Class >>>>>>>>>>>  Now the info of angle 1 and algle 2 as below: ");
                     angle1.showInfo("angle1");
                     angle2.showInfo("angle2");
-                    Console.WriteLine("<<<<<<<< Class >>>>>>>>>>>  Now both angle 1 and angle 2 composes the same angle degree = 360");
+                    Console.WriteLine("<<<<<<<< Class >>>>>>>>>>>  Now both angle 1 and angle 2 composes the same angle degree = 360, they referenced the same address");
 
                     Console.WriteLine();
                     Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>>  Initially, angleS1 degree = 180.");
                     AngleStruc angleS1 = new AngleStruc();
                     angleS1.angleDegree = 180;
-                    Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>> angleS2 = angleS1 (value copy) ");
+                    Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>> angleS2 = angleS1 (deep copy, angleS2 has its own memory address now ");
                     AngleStruc angleS2 = angleS1;
                     Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>> angleS2 degree = 360");
                     angleS2.angleDegree = 360;
                     Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>>  Now the info of angleS 1 and algleS 2 as below: ");
                     angleS1.showInfo("angleS1");
                     angleS2.showInfo("angleS2");
-                    Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>> angleS1 degree = 180, angleS2 = 360");
+                    Console.WriteLine("<<<<<<<< Struct >>>>>>>>>>> angleS1 degree = 180, angleS2 = 360, they are independent");
                     break;
                 case "2":
                     this.sm.showMessage("Hello World!");
