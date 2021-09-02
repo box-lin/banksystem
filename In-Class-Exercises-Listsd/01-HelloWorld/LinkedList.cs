@@ -44,7 +44,7 @@ namespace _01_HelloWorld
                 cur = cur.next;
                 if(cur != null)
                 {
-                    res += ",";
+                    res += "->";
                 }
             }
             return "["+res+"]";
