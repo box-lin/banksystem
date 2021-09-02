@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InClassExercise
+namespace HelloWorld
 {
-    class HelloWorld
+    class SingleLinkedList
     {
-        
     }
 }

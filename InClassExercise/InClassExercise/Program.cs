@@ -1,11 +1,15 @@
 ﻿using System;
-
+using System.IO;
 namespace InClassExercise
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
-        { 
+
+        static ShowMessage sm; 
+        //Constructor
+        public Program()
+        {
+            sm = new ShowMessage();
             while (true)
             {
                 Console.WriteLine("Please enter the commands below: ");
@@ -14,17 +18,22 @@ namespace InClassExercise
                 Console.WriteLine("3 = Write Hello in a file ");
                 Console.WriteLine("4 = Adding two numbers in a Linked List");
                 Console.WriteLine("0 = Quit");
+                
 
-                string commands = Console.ReadLine();
-                run(commands);
+                string command = Console.ReadLine();
+
+                if (command == "0")
+                {
+                    return;
+                }
+              
+                run(command);
+                Console.WriteLine("");//new line
+
             }
-        }
-        //Constructor
-        public Program()
-        {
-            
-        }
 
+        }
+       
         private static void run(string c)
         {
             if (c == null){
@@ -32,25 +41,27 @@ namespace InClassExercise
             }
             switch (c)
             {
-                case "0":
-                    Console.WriteLine("quit");
-                    break;
                 case "1":
                     Console.WriteLine("case 1！");
                     break;
                 case "2":
-                    Console.WriteLine("case 2！");
+                    sm.showMessage("Hello World!");
                     break;
                 case "3":
-                    Console.WriteLine("case 3！");
+                    sm.writeMessage("Hello World");
                     break;
                 case "4":
-                    Console.WriteLine("case 4！");
+                    Console.WriteLine(Directory.GetCurrentDirectory());
                     break;
-
+                default:
+                    Console.WriteLine("Invalid Command!");
+                    break;
             }
-               
+        }
 
+        static void Main(string[] args)
+        {
+            Program pg = new Program();
         }
     }
 }
