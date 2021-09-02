@@ -17,12 +17,12 @@ namespace _01_HelloWorld
         public ShowMessage(string message)
         {
             this.message = message;
-            showMessage(message);
+            showMessage("Result: " + message);
         }
 
         public void showMessage(string message)
         {
-            Console.WriteLine(message);
+            Console.WriteLine("Result: " + message);
         }
 
         public void writeMessage(string message)

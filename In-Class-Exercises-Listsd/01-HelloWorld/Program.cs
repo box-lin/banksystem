@@ -6,10 +6,13 @@ namespace _01_HelloWorld
     {
 
         static ShowMessage sm;
+        static LinkedList list;
         //Constructor
         public Program()
         {
             sm = new ShowMessage();
+            list = new LinkedList();
+
             while (true)
             {
                 Console.WriteLine("Please enter the commands below: ");
@@ -18,7 +21,7 @@ namespace _01_HelloWorld
                 Console.WriteLine("3 = Write Hello in a file ");
                 Console.WriteLine("4 = Adding two numbers in a Linked List");
                 Console.WriteLine("0 = Quit");
-
+                Console.Write("Please Enter The Command (0-4): ");
 
                 string command = Console.ReadLine();
 
@@ -52,7 +55,13 @@ namespace _01_HelloWorld
                     sm.writeMessage("Hello World");
                     break;
                 case "4":
-                    Console.WriteLine("!");
+                    Console.Write("Please Type in the 1st number: ");
+                    string num1 = Console.ReadLine();
+                    Console.Write("Please Type in the 2nd number: ");
+                    string num2 = Console.ReadLine();
+                    list.add(int.Parse(num1));
+                    list.add(int.Parse(num2));
+                    Console.WriteLine("The numbers have been added to the LinkedList: " + list);
                     break;
                 default:
                     Console.WriteLine("Invalid Command!");
