@@ -5,16 +5,16 @@ using System.IO;
 
 namespace _01_HelloWorld
 {
-    public class ShowMessage
+    public class BasicMessageClass
     {
         private string message;
         
-        public ShowMessage()
+        public BasicMessageClass()
         {
             this.message = null;
         }
 
-        public ShowMessage(string message)
+        public BasicMessageClass(string message)
         {
             this.message = message;
             showMessage("Result: " + message);

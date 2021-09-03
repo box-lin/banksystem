@@ -50,16 +50,4 @@ namespace _01_HelloWorld
             return "["+res+"]";
         }
     }
-
-    //Node component
-    class LinkedListNode
-    {
-        public int val;
-        public LinkedListNode next;
-
-        public LinkedListNode(int val)
-        {
-            this.val = val;
-        }
-    }
 }
