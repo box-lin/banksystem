@@ -33,7 +33,7 @@ namespace _01_HelloWorld
                 Console.WriteLine();
                 Console.WriteLine("Continue? Please any key! ");
                 Console.ReadKey();
-
+                Console.WriteLine();
                 Console.WriteLine();
             }
 
@@ -144,13 +144,14 @@ namespace _01_HelloWorld
         /// </summary>
         private void writeMessage()
         {
-            var file = "HelloWorld.txt";
+
+            string filePath = Environment.CurrentDirectory + "\\HelloWorld.txt";
             BasicMessageClass message = new BasicMessageClass("Hello World!");
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(file))
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath))
             {
                 message.showMessage(sw);
             }
-            Console.WriteLine("Wrote in file {0}", file);
+            Console.WriteLine("Wrote in file {0}", filePath);
         }
 
 
