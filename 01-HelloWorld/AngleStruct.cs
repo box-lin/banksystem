@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// <summary>
+/// 
+/// Name: Boxiang Lin 
+/// ID: 011601661
+/// In-Class Exercise 1
+/// 
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,8 +24,8 @@ namespace _01_HelloWorld
 
         public void showInfo(string structure)
         {
-            Console.WriteLine("The Angle Radian for " + structure + " structure is: " + angleRadian);
-            Console.WriteLine("The Angle Degree for " + structure + " structure is: " + angleDegree);
+            Console.WriteLine("******** Struct ***********  The Angle Radian for " + structure + " structure is: " + angleRadian);
+            Console.WriteLine("******** Struct ***********  The Angle Degree for " + structure + " structure is: " + angleDegree);
         }
     }
 }
