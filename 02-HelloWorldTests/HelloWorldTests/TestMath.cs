@@ -3,9 +3,9 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using HelloWorld;
 
-namespace HelloWorldTests
+
+namespace HelloWorld.Math.Tests
 {
     [TestFixture]
     public class TestMath
