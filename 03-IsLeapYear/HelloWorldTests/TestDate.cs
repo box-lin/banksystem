@@ -25,6 +25,8 @@ namespace HelloWorld.Date.Tests
             Assert.AreEqual(true, date.isLeap(2004));
             Assert.AreEqual(true, date.isLeap(2016));
             Assert.AreEqual(true, date.isLeap(1984));
+            Assert.AreEqual(false, date.isLeap(2001));
+            Assert.AreEqual(false, date.isLeap(2002));
 
 
         }
