@@ -9,16 +9,28 @@ namespace HelloWorldTests
 {
     [TestFixture]
     public class TestMath
-    {   
+    {
+
+        private Math math;
+
+        [SetUp]
+        public void SetUp()
+        {
+            math = new Math();
+        }
+
         [Test]
         public void TestAdd()
         {
 
-            // TODO: Add your test code here
-            Assert.AreEqual(5, Math.Add(2, 3));
-            Assert.AreEqual(5, Math.Add(1, 4));
-            Assert.AreEqual(-5, Math.Add(0, -5));
-            Assert.AreEqual(10, Math.Add(-10, 20));
+            //Test for Postive number 
+            Assert.AreEqual(5, math.Add(2, 3));
+
+            //Test for negative number
+            Assert.AreEqual(-5, math.Add(-3, -2));
+
+            //Test for postive and negative addition
+            Assert.AreEqual(0, math.Add(-5, 5));
 
         }
     }

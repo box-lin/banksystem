@@ -2,6 +2,6 @@
 {
     public class Math
     {
-        public static int Add(int a, int b) { return 0;  }
+        public int Add(int a, int b) { return 0;  }
     }
 }
