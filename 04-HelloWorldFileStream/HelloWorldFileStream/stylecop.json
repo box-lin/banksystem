@@ -16,7 +16,7 @@
 
     },
     "orderingRules": {
-      "usingDirectivesPlacement": "insideNamespace"
+      "usingDirectivesPlacement": "outsideNamespace"
     },
     "layoutRules": {
       "newlineAtEndOfFile": "require"

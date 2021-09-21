@@ -1,5 +1,5 @@
-﻿// <copyright file="Utils.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="Program.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
 // </copyright>
 
 namespace HelloWorldFileStream
