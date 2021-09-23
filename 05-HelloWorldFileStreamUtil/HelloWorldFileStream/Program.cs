@@ -2,11 +2,11 @@
 // Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
 // </copyright>
 
+using System;
+using System.IO;
+
 namespace HelloWorldFileStream
 {
-    using System;
-    using System.IO;
-
     /// <summary>
     /// Program that do the control flows of create and write file.
     /// </summary>

@@ -1,22 +1,22 @@
-﻿// <copyright file="Program.cs" company="Boxiang Lin - WSU 011601661">
+﻿// <copyright file="TheStream.cs" company="Boxiang Lin - WSU 011601661">
 // Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
 // </copyright>
 
-namespace HelloWorldFileStream
-{
-    using System;
-    using System.IO;
-    using System.Text;
+using System;
+using System.IO;
+using System.Text;
 
+namespace StreamUtil
+{
     /// <summary>
-    /// Static useful methods are in this class.
+    /// DLL the stream class for file writes.
     /// </summary>
-    public class Utils
+    public class StreamWrite
     {
         /// <summary>
-        /// Write content into the file.
+        /// Write to File with console input.
         /// </summary>
-        /// <param name="s"> FileStream instance. </param>
+        /// <param name="s"> FileStream object. </param>
         public static void WriteFile(FileStream s)
         {
             Console.WriteLine("Please enter the content that you want to write into the file below: ");
