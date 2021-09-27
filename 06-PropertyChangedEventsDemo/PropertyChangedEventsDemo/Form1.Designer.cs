@@ -30,19 +30,19 @@ namespace PropertyChangedEventsDemo
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnFirstName2 = new System.Windows.Forms.Button();
+            this.btnFirstName1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnLastName2 = new System.Windows.Forms.Button();
+            this.btnLastName1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnFirstName2);
+            this.groupBox1.Controls.Add(this.btnFirstName1);
             this.groupBox1.Location = new System.Drawing.Point(115, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(428, 145);
@@ -50,32 +50,30 @@ namespace PropertyChangedEventsDemo
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "First Name";
             // 
-            // button2
+            // btnFirstName2
             // 
-            this.button2.Location = new System.Drawing.Point(32, 89);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(369, 30);
-            this.button2.TabIndex = 1;
-            this.button2.Tag = "Bob";
-            this.button2.Text = "First Nmae is currently Joe. Click to change to Bob";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnFirstName2.Location = new System.Drawing.Point(32, 89);
+            this.btnFirstName2.Name = "btnFirstName2";
+            this.btnFirstName2.Size = new System.Drawing.Size(369, 30);
+            this.btnFirstName2.TabIndex = 1;
+            this.btnFirstName2.Tag = "Bob";
+            this.btnFirstName2.UseVisualStyleBackColor = true;
+            this.btnFirstName2.Click += new System.EventHandler(this.btnFirstName_Click);
             // 
-            // button1
+            // btnFirstName1
             // 
-            this.button1.Location = new System.Drawing.Point(32, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(369, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Tag = "Joe";
-            this.button1.Text = "First Name is currently Joe. Click to change to Joe";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnFirstName1.Location = new System.Drawing.Point(32, 40);
+            this.btnFirstName1.Name = "btnFirstName1";
+            this.btnFirstName1.Size = new System.Drawing.Size(369, 30);
+            this.btnFirstName1.TabIndex = 0;
+            this.btnFirstName1.Tag = "Joe";
+            this.btnFirstName1.UseVisualStyleBackColor = true;
+            this.btnFirstName1.Click += new System.EventHandler(this.btnFirstName_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.btnLastName2);
+            this.groupBox2.Controls.Add(this.btnLastName1);
             this.groupBox2.Location = new System.Drawing.Point(115, 238);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(428, 146);
@@ -83,27 +81,25 @@ namespace PropertyChangedEventsDemo
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Last Name";
             // 
-            // button4
+            // btnLastName2
             // 
-            this.button4.Location = new System.Drawing.Point(32, 86);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(369, 30);
-            this.button4.TabIndex = 2;
-            this.button4.Tag = "Johnson";
-            this.button4.Text = "Last Name is currently smith. Click to change to Johnson.";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnLastName2.Location = new System.Drawing.Point(32, 86);
+            this.btnLastName2.Name = "btnLastName2";
+            this.btnLastName2.Size = new System.Drawing.Size(369, 30);
+            this.btnLastName2.TabIndex = 2;
+            this.btnLastName2.Tag = "Johnson";
+            this.btnLastName2.UseVisualStyleBackColor = true;
+            this.btnLastName2.Click += new System.EventHandler(this.btnLastName_Click);
             // 
-            // button3
+            // btnLastName1
             // 
-            this.button3.Location = new System.Drawing.Point(32, 31);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(369, 30);
-            this.button3.TabIndex = 1;
-            this.button3.Tag = "Smith";
-            this.button3.Text = "Last Name is currently smith. Click to change to Smith";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnLastName1.Location = new System.Drawing.Point(32, 31);
+            this.btnLastName1.Name = "btnLastName1";
+            this.btnLastName1.Size = new System.Drawing.Size(369, 30);
+            this.btnLastName1.TabIndex = 1;
+            this.btnLastName1.Tag = "Smith";
+            this.btnLastName1.UseVisualStyleBackColor = true;
+            this.btnLastName1.Click += new System.EventHandler(this.btnLastName_Click);
             // 
             // Form1
             // 
@@ -124,11 +120,11 @@ namespace PropertyChangedEventsDemo
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnFirstName2;
+        private System.Windows.Forms.Button btnFirstName1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnLastName2;
+        private System.Windows.Forms.Button btnLastName1;
     }
 }
 
