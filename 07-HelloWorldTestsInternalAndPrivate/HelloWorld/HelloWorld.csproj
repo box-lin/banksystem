@@ -46,6 +46,7 @@
     <Compile Include="AngleClass.cs" />
     <Compile Include="AngleStruct.cs" />
     <Compile Include="BasicMessageClass.cs" />
+    <Compile Include="ClassToDemoTestingNonPublic.cs" />
     <Compile Include="LinkedList.cs" />
     <Compile Include="LinkedListNode.cs" />
     <Compile Include="Math.cs" />

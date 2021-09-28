@@ -41,7 +41,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestMath.cs" />
+    <Compile Include="ClassToDemoTestingNonPublicTest.cs" />
+    <Compile Include="TestInternal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
