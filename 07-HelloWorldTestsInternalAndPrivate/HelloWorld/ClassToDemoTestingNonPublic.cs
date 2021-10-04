@@ -17,5 +17,10 @@ namespace HelloWorld
         {
             return aNumber;
         }
+
+        private int privateInstanceMethod(int aNumber, int bNumber)
+        {
+            return aNumber+bNumber;
+        }
     }
 }   
