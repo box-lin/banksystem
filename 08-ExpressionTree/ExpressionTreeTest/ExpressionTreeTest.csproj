@@ -40,15 +40,20 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestExpressionTree.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExpressionTree\ExpressionTree.csproj">
-      <Project>{203769a6-0c94-48f1-a341-246baf30aae6}</Project>
-      <Name>ExpressionTree</Name>
+    <Compile Include="TestExpressionTree.cs" />
+    <Compile Include="TestOpNodeFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OperatorLibraryForTest\OperatorLibraryForTest.csproj">
+      <Project>{9d8b7d75-148c-44ff-8d71-d71e018b3e2a}</Project>
+      <Name>OperatorLibraryForTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheExpressionTree\TheExpressionTree.csproj">
+      <Project>{f7988a45-10cb-4aa5-b996-96a2fd134523}</Project>
+      <Name>TheExpressionTree</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
