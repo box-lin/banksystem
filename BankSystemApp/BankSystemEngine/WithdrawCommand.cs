@@ -12,6 +12,11 @@ namespace BankSystemEngine
     public class WithdrawCommand : ICommand
     {
 
+
+        private BankAccount acc;
+        private double prevAmount;
+        private double withdrawAmount;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WithdrawCommand"/> class.
         /// </summary>
@@ -19,7 +24,9 @@ namespace BankSystemEngine
         /// <param name="amount"> amount deposit. </param>
         public WithdrawCommand(BankAccount acc, double amount)
         {
-
+            this.acc = acc;
+            this.prevAmount = amount;
+            this.withdrawAmount = amount;
         }
 
         /// <summary>
@@ -28,7 +35,7 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool Execute()
         {
-            return false;
+            return this.acc.Withdraw(this.withdrawAmount);
 
         }
 
@@ -37,6 +44,7 @@ namespace BankSystemEngine
         /// </summary>
         public void Unexecute()
         {
+            this.acc.Deposit(this.prevAmount);
         }
     }
 }
