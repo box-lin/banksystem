@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BankAccount.cs" />
+    <Compile Include="CheckingAccount.cs" />
+    <Compile Include="LoanAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SavingAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
