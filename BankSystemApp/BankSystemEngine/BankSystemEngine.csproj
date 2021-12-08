@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="BankAccount.cs" />
     <Compile Include="CheckingAccount.cs" />
+    <Compile Include="DepositCommand.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="LoanAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SavingAccount.cs" />
+    <Compile Include="WithdrawCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
