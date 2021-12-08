@@ -11,7 +11,10 @@ namespace BankSystemEngine
     /// </summary>
     public class WithdrawCommand : ICommand
     {
+        public WithdrawCommand(BankAccount acc, double Amount)
+        {
 
+        }
         /// <summary>
         /// Execute the withdraw.
         /// </summary>

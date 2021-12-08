@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestCheckingAccount.cs" />
+    <Compile Include="TestDepositCommand.cs" />
     <Compile Include="TestLoanAccount.cs" />
     <Compile Include="TestSavingAccount.cs" />
+    <Compile Include="TestWithdrawCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

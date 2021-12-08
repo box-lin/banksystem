@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using BankSystemEngine;
 using NUnit.Framework;
 
-
 namespace BankSystemEngineTest
 {
 

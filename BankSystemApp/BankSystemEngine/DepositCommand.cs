@@ -11,6 +11,11 @@ namespace BankSystemEngine
     /// </summary>
     public class DepositCommand : ICommand
     {
+        public DepositCommand(BankAccount acc, double amount)
+        {
+
+        }
+
         /// <summary>
         /// Execute the deposite.
         /// </summary>
