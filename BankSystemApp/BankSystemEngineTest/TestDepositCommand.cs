@@ -34,6 +34,7 @@ namespace BankSystemEngineTest
         public void TestUnexecute()
         {
             SavingAccount acc = new SavingAccount(123);
+            acc.Deposit(50.0);
             DepositCommand dc = new DepositCommand(acc, 100.0);
             dc.Execute();
             dc.Unexecute();

@@ -11,9 +11,21 @@ namespace BankSystemEngine
     /// </summary>
     public class DepositCommand : ICommand
     {
+        private BankAccount acc;
+        private double prevAmount;
+        private double depositAmount;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepositCommand"/> class.
+        /// Deposit Comma Constructor.
+        /// </summary>
+        /// <param name="acc"> bank acc. </param>
+        /// <param name="amount"> amount deposit. </param>
         public DepositCommand(BankAccount acc, double amount)
         {
-
+            this.acc = acc;
+            this.prevAmount = amount;
+            this.depositAmount = amount;
         }
 
         /// <summary>
@@ -22,7 +34,7 @@ namespace BankSystemEngine
         /// <returns> can execute or not. </returns>
         public bool Execute()
         {
-            return false;
+            return this.acc.Deposit(this.depositAmount);
         }
 
         /// <summary>
@@ -30,6 +42,7 @@ namespace BankSystemEngine
         /// </summary>
         public void Unexecute()
         {
+            this.acc.Withdraw(this.prevAmount);
         }
     }
 }
