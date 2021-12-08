@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace BankSystemEngineTest
 {
     [TestFixture]
-    public class TestClass
+    public class TestSavingAccount
     {
         [Test]
         public void TestMethod()
