@@ -11,10 +11,17 @@ namespace BankSystemEngine
     /// </summary>
     public class WithdrawCommand : ICommand
     {
-        public WithdrawCommand(BankAccount acc, double Amount)
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WithdrawCommand"/> class.
+        /// </summary>
+        /// <param name="acc"> account number. </param>
+        /// <param name="amount"> amount deposit. </param>
+        public WithdrawCommand(BankAccount acc, double amount)
         {
 
         }
+
         /// <summary>
         /// Execute the withdraw.
         /// </summary>
@@ -22,6 +29,7 @@ namespace BankSystemEngine
         public bool Execute()
         {
             return false;
+
         }
 
         /// <summary>
@@ -29,7 +37,6 @@ namespace BankSystemEngine
         /// </summary>
         public void Unexecute()
         {
-            throw new NotImplementedException();
         }
     }
 }
