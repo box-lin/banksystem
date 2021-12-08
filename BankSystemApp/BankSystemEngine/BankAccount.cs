@@ -34,6 +34,7 @@ namespace BankSystemEngine
         /// <param name="accNumber"> int acc number. </param>
         public void SetAccNumber(int accNumber)
         {
+            this.accNumber = accNumber;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace BankSystemEngine
         /// <returns> acc number. </returns>
         public int GetAccNumber()
         {
-            return 0;
+            return this.accNumber;
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace BankSystemEngine
         /// <returns> acc balance. </returns>
         public double GetAccBalance()
         {
-            return 0;
+            return this.accBalance;
         }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool Deposit(double amount)
         {
+            this.SetAccBalance(this.GetAccBalance() + amount);
             return true;
         }
 
@@ -71,6 +73,12 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool Withdraw(double amount)
         {
+            if (this.GetAccBalance() < amount)
+            {
+                return false;
+            }
+
+            this.SetAccBalance(this.GetAccBalance() - amount);
             return true;
         }
 
@@ -81,6 +89,7 @@ namespace BankSystemEngine
         /// <param name="result"> the specific amount. </param>
         protected void SetAccBalance(double result)
         {
+            this.accBalance = result;
         }
     }
 }

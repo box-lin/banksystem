@@ -15,7 +15,7 @@ namespace BankSystemEngine
         /// Initializes a new instance of the <see cref="CheckingAccount"/> class.
         /// </summary>
         /// <param name="accNumber"> account number. </param>
-        public CheckingAccount(int accNumber) 
+        public CheckingAccount(int accNumber)
             : base(accNumber)
         {
         }
