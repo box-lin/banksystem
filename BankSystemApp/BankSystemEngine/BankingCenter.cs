@@ -89,6 +89,24 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Gets all client account in RegisterUser container.
+        /// </summary>
+        /// <returns> dict of client. </returns>
+        public Dictionary<string, Client> GetAllClientAcc()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Gets all employee account in RegistgerUser container.
+        /// </summary>
+        /// <returns>dict of employee. </returns>
+        public Dictionary<string, Employee> GetAllEmplopyeeAcc()
+        {
+            return null;
+        }
+
+        /// <summary>
         /// hard coded few accounts for this version.
         /// </summary>
         private void DummyRegistration()
