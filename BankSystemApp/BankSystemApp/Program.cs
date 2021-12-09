@@ -1,8 +1,10 @@
-﻿using System;
+﻿// <copyright file="Program.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BankSystemEngine;
 
 namespace BankSystemApp
@@ -55,7 +57,6 @@ namespace BankSystemApp
                 {
                     Client loggedClient = this.bc.GetClientAcc(username, password);
                     this.ShowClientMenu(loggedClient);
-
                 }
             }
             else if (accountType == "2")
@@ -105,7 +106,6 @@ namespace BankSystemApp
             string password = this.EnterPassword();
             return password;
         }
-
 
         /// <summary>
         /// Verify the username and password first.

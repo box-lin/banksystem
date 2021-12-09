@@ -15,7 +15,6 @@ namespace BankSystemEngine
     /// </summary>
     public class BankingCenter
     {
-
         // client with set of acc nums.
         private Dictionary<Client, HashSet<int>> clientAccount;
 
@@ -135,6 +134,7 @@ namespace BankSystemEngine
                 return deposited && (!undo);
             }
 
+            Console.WriteLine("* <Failure>: The amount doesn't exist!");
             return false;
         }
 
@@ -198,6 +198,7 @@ namespace BankSystemEngine
                 return withdraw && (!undo);
             }
 
+            Console.WriteLine("* <Failure>: The amount doesn't exist!");
             return false;
         }
 

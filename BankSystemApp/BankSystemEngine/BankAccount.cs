@@ -168,6 +168,24 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Gets the undo stack size.
+        /// </summary>
+        /// <returns> undo stack size. </returns>
+        public int GetUndoStackSize()
+        {
+            return this.undo.Count;
+        }
+
+        /// <summary>
+        /// Gets the redo stack size.
+        /// </summary>
+        /// <returns> redo stack size. </returns>
+        public int GetRedoStackSize()
+        {
+            return this.redo.Count;
+        }
+
+        /// <summary>
         /// Use to set the account balance.
         /// Protected usage for only deriving classes.
         /// </summary>

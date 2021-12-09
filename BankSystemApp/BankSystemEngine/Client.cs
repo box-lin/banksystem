@@ -15,7 +15,6 @@ namespace BankSystemEngine
     /// </summary>
     public class Client : User
     {
-
         // specific on clients.
         private readonly double minSavingBalanceReq = 15000.00;
 

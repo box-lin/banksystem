@@ -57,7 +57,7 @@ namespace BankSystemEngine
         /// <returns> interest rate in string. </returns>
         public string GetAccountInterestRate()
         {
-            return string.Empty;
+            return this.interest + "%";
         }
     }
 }

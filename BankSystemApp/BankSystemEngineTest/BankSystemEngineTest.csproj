@@ -48,6 +48,7 @@
     <Compile Include="TestRegisterUser.cs" />
     <Compile Include="TestSavingAccount.cs" />
     <Compile Include="TestTransactionRecord.cs" />
+    <Compile Include="TestUndoRedo.cs" />
     <Compile Include="TestWithdrawCommand.cs" />
   </ItemGroup>
   <ItemGroup>

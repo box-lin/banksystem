@@ -23,7 +23,7 @@ namespace BankSystemEngine
         /// <summary>
         /// The loan interest default rate.
         /// </summary>
-        private readonly double interest = 8.8;
+        private double interest = 8.8;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoanAccount"/> class.
@@ -70,7 +70,7 @@ namespace BankSystemEngine
         /// <returns> string of interest rate. </returns>
         public string GetAccountInterestRate()
         {
-            return string.Empty;
+            return this.interest + "%";
         }
 
         /// <summary>
@@ -78,6 +78,7 @@ namespace BankSystemEngine
         /// </summary>
         private void InterestAccumulation()
         {
+            this.interest = this.interest + 0;
         }
 
         /// <summary>
