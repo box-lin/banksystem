@@ -48,6 +48,7 @@ namespace BankSystemEngine
             {
                 // distribute the load amount to the balance.
                 command.Execute();
+                this.NewCommandAdd(command);
             }
 
             return canBorrow;
@@ -61,6 +62,15 @@ namespace BankSystemEngine
         public bool PayOffLoan(WithdrawCommand command)
         {
             bool success = command.Execute();
+            if (success)
+            {
+                this.NewCommandAdd(command);
+            }
+            else
+            {
+                Console.WriteLine("* <Failure>: Your payment pay over the amount you owed. Your max payment is $" + this.GetAccBalance());
+            }
+
             return success;
         }
 

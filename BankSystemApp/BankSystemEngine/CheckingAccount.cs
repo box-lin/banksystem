@@ -32,6 +32,11 @@ namespace BankSystemEngine
         public bool DepositChecking(DepositCommand command)
         {
             bool isSuccess = command.Execute();
+            if (isSuccess)
+            {
+                this.NewCommandAdd(command);
+            }
+
             return isSuccess;
         }
 
@@ -43,6 +48,15 @@ namespace BankSystemEngine
         public bool WithdrawChecking(WithdrawCommand command)
         {
             bool isSuccess = command.Execute();
+            if (isSuccess)
+            {
+                this.NewCommandAdd(command);
+            }
+            else
+            {
+                Console.WriteLine("* <Failure>: Sorry there is no sufficient amount for withdraw. Your balance is: " + this.GetAccBalance());
+            }
+
             return isSuccess;
         }
     }

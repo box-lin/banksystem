@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BankSystemEngine
@@ -90,8 +91,7 @@ namespace BankSystemEngine
                 SavingAccount saveAcc = loggedClient.GetAllSavingAccount()[accNumber];
                 if (deposited)
                 {
-                    // later.
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(saveAcc);
                 }
 
                 if (!undo)
@@ -107,7 +107,7 @@ namespace BankSystemEngine
                 CheckingAccount checkAcc = loggedClient.GetAllCheckingAccount()[accNumber];
                 if (deposited)
                 {
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(checkAcc);
                 }
 
                 if (!undo)
@@ -123,7 +123,7 @@ namespace BankSystemEngine
                 LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
                 if (deposited)
                 {
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(loanAcc);
                 }
 
                 if (!undo)
@@ -155,9 +155,10 @@ namespace BankSystemEngine
                 SavingAccount saveAcc = loggedClient.GetAllSavingAccount()[accNumber];
                 if (withdraw)
                 {
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(saveAcc);
                 }
 
+                // if user didnt undo we add the transaction to record.
                 if (!undo)
                 {
                     saveAcc.UpdateTransaction(accNumber, "Withdraw", amount, saveAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
@@ -171,9 +172,10 @@ namespace BankSystemEngine
                 CheckingAccount checkAcc = loggedClient.GetAllCheckingAccount()[accNumber];
                 if (withdraw)
                 {
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(checkAcc);
                 }
 
+                // if user didnt undo we add the transaction to record.
                 if (!undo)
                 {
                     checkAcc.UpdateTransaction(accNumber, "Withdraw", amount, checkAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
@@ -187,7 +189,7 @@ namespace BankSystemEngine
                 LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
                 if (withdraw)
                 {
-                    undo = false;
+                    undo = this.RunUndoRedoCommand(loanAcc);
                 }
 
                 if (!undo)
@@ -314,6 +316,61 @@ namespace BankSystemEngine
             foreach (Client c in this.reg.GetAllClientAccount().Values)
             {
                 this.clientAccount[c] = new HashSet<int>();
+            }
+        }
+
+        /// <summary>
+        /// Run the undo redo by user input.
+        /// </summary>
+        /// <param name="acc"> generic bank account. </param>
+        /// <returns> undo or not. </returns>
+        private bool RunUndoRedoCommand(BankAccount acc)
+        {
+            // seperate thread to run the counter of 10 seconds.
+            Thread timer = new Thread(() => this.RunTimer(acc));
+            string command = string.Empty;
+            bool undo = false;
+            timer.Start();
+            while (timer.IsAlive)
+            {
+                command = Console.ReadLine();
+                if (command == "r")
+                {
+                    acc.RunRedoCommand();
+                    undo = false;
+                }
+                else if (command == "u")
+                {
+                    acc.RunUndoCommand();
+                    undo = true;
+                }
+                else
+                {
+                    timer.Abort();
+                    return undo;
+                }
+            }
+
+            return undo;
+        }
+
+        /// <summary>
+        /// Thread sleep runner.
+        /// </summary>
+        /// <param name="acc"> bank account. </param>
+        private void RunTimer(BankAccount acc)
+        {
+            for (int i = 10; i > 0; i--)
+            {
+                Thread.Sleep(999);
+                if (acc.GetRedoStackSize() > 0)
+                {
+                    Console.Write("\r* Your can redo last transaction by 'r' within " + i + " seconds or 'q' to quit: ");
+                }
+                else if (acc.GetUndoStackSize() > 0)
+                {
+                    Console.Write("\r* Your can undo last transaction by 'u' within " + i + " seconds or 'q' to quit: ");
+                }
             }
         }
     }
