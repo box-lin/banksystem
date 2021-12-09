@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestCheckingAccount.cs" />
+    <Compile Include="TestClient.cs" />
     <Compile Include="TestDepositCommand.cs" />
     <Compile Include="TestLoanAccount.cs" />
     <Compile Include="TestSavingAccount.cs" />

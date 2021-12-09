@@ -138,5 +138,32 @@ namespace BankSystemEngine
         {
             return false;
         }
+
+        /// <summary>
+        /// Gets all the saving account.
+        /// </summary>
+        /// <returns> saving account dict. </returns>
+        public Dictionary<int, SavingAccount> GetAllSavingAccount()
+        {
+            return this.savingAccounts;
+        }
+
+        /// <summary>
+        /// Gets all the checking account.
+        /// </summary>
+        /// <returns> checking account dict. </returns>
+        public Dictionary<int, CheckingAccount> GetAllCheckingAccount()
+        {
+            return this.checkingAccounts;
+        }
+
+        /// <summary>
+        /// Gets all the loan account.
+        /// </summary>
+        /// <returns> loan account dict. </returns>
+        public Dictionary<int, LoanAccount> GetAllLoanAccount()
+        {
+            return this.loanAccounts;
+        }
     }
 }
