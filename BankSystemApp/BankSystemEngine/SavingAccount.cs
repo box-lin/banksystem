@@ -20,9 +20,29 @@ namespace BankSystemEngine
         /// Initializes a new instance of the <see cref="SavingAccount"/> class.
         /// </summary>
         /// <param name="accNumber"> account number. </param>
-        public SavingAccount(int accNumber) 
+        public SavingAccount(int accNumber)
             : base(accNumber)
         {
+        }
+
+        /// <summary>
+        /// Saving acc deposit interface by Command pattern.
+        /// </summary>
+        /// <param name="command"> Deposit command. </param>
+        /// <returns> can deposit or not. </returns>
+        public bool DepositSaving(DepositCommand command)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Saving acc withdraw interface by COmmand pattern.
+        /// </summary>
+        /// <param name="command"> Withdraw Command. </param>
+        /// <returns> can withdraw or not. </returns>
+        public bool WithdrawSaving(WithdrawCommand command)
+        {
+            return false;
         }
 
         /// <summary>

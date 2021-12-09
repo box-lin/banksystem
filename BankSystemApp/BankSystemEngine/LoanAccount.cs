@@ -33,6 +33,26 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Loan acc borrow money interface by command pattern.
+        /// </summary>
+        /// <param name="command">Deposit command. </param>
+        /// <returns>can borrow or cannot. </returns>
+        public bool RequestLoan(DepositCommand command)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Loan acc pay load interface by command pattern.
+        /// </summary>
+        /// <param name="command">Withdraw command. </param>
+        /// <returns> can pay or cannot. </returns>
+        public bool PayOffLoan(WithdrawCommand command)
+        {
+            return false;
+        }
+
+        /// <summary>
         /// Show client the interest rate.
         /// </summary>
         /// <returns> string of interest rate. </returns>

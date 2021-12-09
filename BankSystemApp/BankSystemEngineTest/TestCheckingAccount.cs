@@ -102,5 +102,30 @@ namespace BankSystemEngineTest
             bool isSucess = checkAcc.Withdraw(100.0);
             Assert.AreEqual(true, isSucess);
         }
+
+        /// <summary>
+        /// Test the check acc deposit with the command object.
+        /// </summary>
+        [Test]
+        public void TestCheckingDepositWithCommand()
+        {
+            CheckingAccount checkAcc = new CheckingAccount(123);
+            DepositCommand dc = new DepositCommand(checkAcc, 100.0);
+            checkAcc.DepositChecking(dc);
+            Assert.AreEqual(checkAcc.GetAccBalance(), 100.0);
+        }
+
+        /// <summary>
+        /// Test the check acc withdraw with the command object.
+        /// </summary>
+        [Test]
+        public void TestCheckingWIthdrawWithCommand()
+        {
+            CheckingAccount checkAcc = new CheckingAccount(123);
+            checkAcc.Deposit(100.0);
+            WithdrawCommand dc = new WithdrawCommand(checkAcc, 50.0);
+            checkAcc.WithdrawChecking(dc);
+            Assert.AreEqual(checkAcc.GetAccBalance(), 50.0);
+        }
     }
 }
