@@ -44,5 +44,14 @@ namespace BankSystemEngine
         {
             this.acc.Withdraw(this.prevAmount);
         }
+
+        /// <summary>
+        /// Get the deposit amount.
+        /// </summary>
+        /// <returns> deposit amount. </returns>
+        public double GetDepositAmount()
+        {
+            return this.depositAmount;
+        }
     }
 }

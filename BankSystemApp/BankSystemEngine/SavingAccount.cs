@@ -32,7 +32,8 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool DepositSaving(DepositCommand command)
         {
-            return false;
+            bool isSuccess = command.Execute();
+            return isSuccess;
         }
 
         /// <summary>
@@ -42,7 +43,8 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool WithdrawSaving(WithdrawCommand command)
         {
-            return false;
+            bool isSuccess = command.Execute();
+            return isSuccess;
         }
 
         /// <summary>

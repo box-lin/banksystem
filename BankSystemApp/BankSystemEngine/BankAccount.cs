@@ -15,8 +15,15 @@ namespace BankSystemEngine
     /// </summary>
     public abstract class BankAccount
     {
+
         private int accNumber;
         private double accBalance;
+
+        // undo stack track of command to undo.
+        private Stack<ICommand> undo;
+
+        // redo  stack track of command to redo.
+        private Stack<ICommand> redo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccount"/> class.
@@ -26,6 +33,8 @@ namespace BankSystemEngine
         {
             this.accNumber = accNumber;
             this.accBalance = 0.0;
+            this.undo = new Stack<ICommand>(1);
+            this.redo = new Stack<ICommand>(1);
         }
 
         /// <summary>
@@ -80,6 +89,42 @@ namespace BankSystemEngine
 
             this.SetAccBalance(this.GetAccBalance() - amount);
             return true;
+        }
+
+        /// <summary>
+        /// Command object that add to the undo stack at first.
+        /// </summary>
+        /// <param name="command"> command. </param>
+        public void NewCommandAdd(ICommand command)
+        {
+            this.redo.Clear();
+            this.undo.Push(command);
+        }
+
+        /// <summary>
+        /// Run the command object at the top of undo.
+        /// </summary>
+        public void RunUndoCommand()
+        {
+            if (this.undo.Count > 0)
+            {
+                ICommand c = this.undo.Pop();
+                c.Unexecute();
+                this.redo.Push(c);
+            }
+        }
+
+        /// <summary>
+        /// Run the command object at the top of redo.
+        /// </summary>
+        public void RunRedoCommand()
+        {
+            if (this.redo.Count > 0)
+            {
+                ICommand c = this.redo.Pop();
+                c.Execute();
+                this.undo.Push(c);
+            }
         }
 
         /// <summary>

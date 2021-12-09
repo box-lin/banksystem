@@ -20,14 +20,14 @@ namespace BankSystemEngineTest
         [Test]
         public void TestGoodRequestLoandWithCommand()
         {
-            LoanAccount la = new LoanAccount(123,1000.0);
+            LoanAccount la = new LoanAccount(123, 1000.0);
             DepositCommand cmd = new DepositCommand(la, 300.0);
             bool success = la.RequestLoan(cmd);
 
             Assert.IsTrue(success);
 
             // note that the acc balance for loan is the amount owed.
-            Assert.AreEqual(la.GetAccBalance(), 300.0);
+            Assert.AreEqual(300.0, la.GetAccBalance());
         }
 
 
