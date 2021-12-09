@@ -44,6 +44,7 @@
     <Compile Include="TestClient.cs" />
     <Compile Include="TestDepositCommand.cs" />
     <Compile Include="TestLoanAccount.cs" />
+    <Compile Include="TestRegisterUser.cs" />
     <Compile Include="TestSavingAccount.cs" />
     <Compile Include="TestTransactionRecord.cs" />
     <Compile Include="TestWithdrawCommand.cs" />
