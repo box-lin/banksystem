@@ -96,9 +96,9 @@ namespace BankSystemEngineTest
         public void TestRequestLoanLoanAcc()
         {
             Client client = new Client("c", "123", "ccc", "aaa", "c@wsu.edu");
-            client.CreateCheckingAcc(1, 15000.00);
-            Assert.AreEqual(client.GetAllCheckingAccount().Count, 1);
-            Assert.IsTrue(client.GetAllCheckingAccount().ContainsKey(1));
+            client.CreateLoanAcc(1, 15000.00);
+            Assert.AreEqual(client.GetAllLoanAccount().Count, 1);
+            Assert.IsTrue(client.GetAllLoanAccount().ContainsKey(1));
             bool success = client.RequestLoanLoanAcc(1, 200.0);
             Assert.IsTrue(success);
             Assert.AreEqual(client.GetAllLoanAccount()[1].GetAccBalance(), 200.0);
@@ -115,7 +115,7 @@ namespace BankSystemEngineTest
             Assert.AreEqual(client.GetAllSavingAccount().Count, 1);
             bool success = client.WithdrawSavingAcc(1, 100.0);
             Assert.IsTrue(success);
-            Assert.AreEqual(client.GetAllSavingAccount()[1].GetAccBalance(), 17000.0);
+            Assert.AreEqual(client.GetAllSavingAccount()[1].GetAccBalance(), 17900.0);
         }
 
         /// <summary>
@@ -139,14 +139,14 @@ namespace BankSystemEngineTest
         public void TestPayPaymentLoanAcc()
         {
             Client client = new Client("c", "123", "ccc", "aaa", "c@wsu.edu");
-            client.CreateCheckingAcc(1, 15000.00);
-            Assert.AreEqual(client.GetAllCheckingAccount().Count, 1);
-            Assert.IsTrue(client.GetAllCheckingAccount().ContainsKey(1));
+            client.CreateLoanAcc(1, 15000.00);
+            Assert.AreEqual(client.GetAllLoanAccount().Count, 1);
+            Assert.IsTrue(client.GetAllLoanAccount().ContainsKey(1));
             bool success = client.RequestLoanLoanAcc(1, 200.0);
             Assert.IsTrue(success);
             Assert.AreEqual(client.GetAllLoanAccount()[1].GetAccBalance(), 200.0);
 
-            bool sucess = client.PayPymentLoanAcc(1, 200.0);
+            client.PayPymentLoanAcc(1, 200.0);
             Assert.AreEqual(client.GetAllLoanAccount()[1].GetAccBalance(), 0.0);
 
         }

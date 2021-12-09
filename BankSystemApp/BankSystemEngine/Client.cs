@@ -22,6 +22,9 @@ namespace BankSystemEngine
         private Dictionary<int, CheckingAccount> checkingAccounts;
         private Dictionary<int, LoanAccount> loanAccounts;
 
+        // specific on clients.
+        private double minSavingBalanceReq = 15000.00;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
         /// </summary>
@@ -49,7 +52,19 @@ namespace BankSystemEngine
         /// <returns> can create or not. </returns>
         public bool CreateSavingAcc(int accNumber, double initialDeposit)
         {
-            return false;
+            bool okRule = this.EnsureMinBalanceRequirement(initialDeposit);
+            if (!okRule)
+            {
+                Console.WriteLine("* < Failure >: Fail to open saving account, initial deposit must greater than $" + this.minSavingBalanceReq);
+                return false;
+            }
+
+            SavingAccount saveAcc = new SavingAccount(accNumber);
+            DepositCommand depositCommand = new DepositCommand(saveAcc, initialDeposit);
+            saveAcc.DepositSaving(depositCommand);
+            saveAcc.UpdateTransaction(accNumber, "Save Account Open", initialDeposit, saveAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+            this.savingAccounts[accNumber] = saveAcc;
+            return true;
         }
 
         /// <summary>
@@ -59,6 +74,11 @@ namespace BankSystemEngine
         /// <param name="initialDeposit"> initial deposit. </param>
         public void CreateCheckingAcc(int accNumber, double initialDeposit)
         {
+            CheckingAccount checkAcc = new CheckingAccount(accNumber);
+            DepositCommand depositCommand = new DepositCommand(checkAcc, initialDeposit);
+            checkAcc.DepositChecking(depositCommand);
+            checkAcc.UpdateTransaction(accNumber, "Check Account Open", initialDeposit, checkAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+            this.checkingAccounts[accNumber] = checkAcc;
         }
 
         /// <summary>
@@ -68,6 +88,9 @@ namespace BankSystemEngine
         /// <param name="loanLimit"> loan limit. </param>
         public void CreateLoanAcc(int accNumber, double loanLimit)
         {
+            LoanAccount loanAcc = new LoanAccount(accNumber, loanLimit);
+            loanAcc.UpdateTransaction(accNumber, "Loan Account Open", 0.0, loanAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+            this.loanAccounts[accNumber] = loanAcc;
         }
 
         // -------------------------------------------------------------------------------------------//
@@ -81,7 +104,9 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool DepositSavingAcc(int accNumber, double amount)
         {
-            return false;
+            SavingAccount acc = this.savingAccounts[accNumber];
+            DepositCommand dCommand = new DepositCommand(acc, amount);
+            return acc.DepositSaving(dCommand);
         }
 
         /// <summary>
@@ -92,7 +117,9 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool DepositCheckingAcc(int accNumber, double amount)
         {
-            return false;
+            CheckingAccount acc = this.checkingAccounts[accNumber];
+            DepositCommand dCommand = new DepositCommand(acc, amount);
+            return acc.DepositChecking(dCommand);
         }
 
         /// <summary>
@@ -103,7 +130,9 @@ namespace BankSystemEngine
         /// <returns> can borrow or not. </returns>
         public bool RequestLoanLoanAcc(int accNumber, double amount)
         {
-            return false;
+            LoanAccount acc = this.loanAccounts[accNumber];
+            DepositCommand dCommand = new DepositCommand(acc, amount);
+            return acc.RequestLoan(dCommand);
         }
 
         /// <summary>
@@ -114,7 +143,16 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool WithdrawSavingAcc(int accNumber, double amount)
         {
-            return false;
+            SavingAccount acc = this.savingAccounts[accNumber];
+            bool okRule = this.EnsureMinBalanceRequirement(acc.GetAccBalance() - amount);
+            if (!okRule)
+            {
+                Console.WriteLine("* < Failure >: Fail to withdraw, saving account balance must maintain greater than $" + this.minSavingBalanceReq);
+                return false;
+            }
+
+            WithdrawCommand wCommand = new WithdrawCommand(acc, amount);
+            return acc.WithdrawSaving(wCommand);
         }
 
         /// <summary>
@@ -125,7 +163,9 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool WithdrawCheckingAcc(int accNumber, double amount)
         {
-            return false;
+            CheckingAccount acc = this.checkingAccounts[accNumber];
+            WithdrawCommand wCommand = new WithdrawCommand(acc, amount);
+            return acc.WithdrawChecking(wCommand);
         }
 
         /// <summary>
@@ -136,7 +176,9 @@ namespace BankSystemEngine
         /// <returns> can pay or not. </returns>
         public bool PayPymentLoanAcc(int accNumber, double amount)
         {
-            return false;
+            LoanAccount acc = this.loanAccounts[accNumber];
+            WithdrawCommand wCommand = new WithdrawCommand(acc, amount);
+            return acc.PayOffLoan(wCommand);
         }
 
         /// <summary>
@@ -164,6 +206,21 @@ namespace BankSystemEngine
         public Dictionary<int, LoanAccount> GetAllLoanAccount()
         {
             return this.loanAccounts;
+        }
+
+        /// <summary>
+        /// To ensure that the saving account always satisfy the min balance requirement.
+        /// </summary>
+        /// <param name="afterBalance"> predicted balance. </param>
+        /// <returns> satisfy or not. </returns>
+        private bool EnsureMinBalanceRequirement(double afterBalance)
+        {
+            if (afterBalance < this.minSavingBalanceReq)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
