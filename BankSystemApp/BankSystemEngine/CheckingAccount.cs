@@ -19,5 +19,25 @@ namespace BankSystemEngine
             : base(accNumber)
         {
         }
+
+        /// <summary>
+        /// Check acc deposit interface by command pattern.
+        /// </summary>
+        /// <param name="command"> Deposit command. </param>
+        /// <returns> can deposit or not. </returns>
+        public bool DepositChecking(DepositCommand command)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Check acc withdraw interface by command pattern.
+        /// </summary>
+        /// <param name="command"> Withdraw command. </param>
+        /// <returns> can withdraw or not. </returns>
+        public bool WithdrawChecking(WithdrawCommand command)
+        {
+            return false;
+        }
     }
 }
