@@ -11,6 +11,10 @@ namespace BankSystemEngine
     /// </summary>
     public class BankingCenter
     {
+
+        // client with set of acc nums.
+        private Dictionary<Client, HashSet<int>> clientAccount;
+
         // register user here receive commands from bank center.
         private RegisterUser reg;
 
@@ -22,8 +26,14 @@ namespace BankSystemEngine
         /// </summary>
         public BankingCenter()
         {
+            this.reg = new RegisterUser();
+            this.clientAccount = new Dictionary<Client, HashSet<int>>();
+
             // create some accounts.
             this.DummyRegistration();
+
+            // init client to acc num dictionary.
+            this.InitClientDict();
         }
 
         /// <summary>
@@ -34,7 +44,18 @@ namespace BankSystemEngine
         /// <returns> found client or not. </returns>
         public bool LoginClient(string username, string password)
         {
-            return false;
+            Client client = this.reg.GetClient(username);
+            if (client == null)
+            {
+                return false;
+            }
+
+            if (password != client.GetPassWord())
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -46,6 +67,59 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool AccountDeposit(Client loggedClient, int accNumber, double amount)
         {
+            bool deposited = false;
+            bool undo = false;
+
+            if (loggedClient.GetAllSavingAccount().ContainsKey(accNumber))
+            {
+                deposited = loggedClient.DepositSavingAcc(accNumber, amount);
+                SavingAccount saveAcc = loggedClient.GetAllSavingAccount()[accNumber];
+                if (deposited)
+                {
+                    // later.
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    saveAcc.UpdateTransaction(accNumber, "Deposit", amount, saveAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return deposited && (!undo);
+            }
+            else if (loggedClient.GetAllCheckingAccount().ContainsKey(accNumber))
+            {
+                deposited = loggedClient.DepositCheckingAcc(accNumber, amount);
+                CheckingAccount checkAcc = loggedClient.GetAllCheckingAccount()[accNumber];
+                if (deposited)
+                {
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    checkAcc.UpdateTransaction(accNumber, "Deposit", amount, checkAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return deposited && (!undo);
+            }
+            else if (loggedClient.GetAllLoanAccount().ContainsKey(accNumber))
+            {
+                deposited = loggedClient.RequestLoanLoanAcc(accNumber, amount); // balance here is what owed.
+                LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
+                if (deposited)
+                {
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    loanAcc.UpdateTransaction(accNumber, "Borrow", amount, loanAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return deposited && (!undo);
+            }
+
             return false;
         }
 
@@ -58,6 +132,57 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool AccountWithdraw(Client loggedClient, int accNumber, double amount)
         {
+            bool withdraw = false;
+            bool undo = false;
+            if (loggedClient.GetAllSavingAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.WithdrawSavingAcc(accNumber, amount);
+                SavingAccount saveAcc = loggedClient.GetAllSavingAccount()[accNumber];
+                if (withdraw)
+                {
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    saveAcc.UpdateTransaction(accNumber, "Withdraw", amount, saveAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return withdraw && (!undo);
+            }
+            else if (loggedClient.GetAllCheckingAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.WithdrawCheckingAcc(accNumber, amount);
+                CheckingAccount checkAcc = loggedClient.GetAllCheckingAccount()[accNumber];
+                if (withdraw)
+                {
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    checkAcc.UpdateTransaction(accNumber, "Withdraw", amount, checkAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return withdraw && (!undo);
+            }
+            else if (loggedClient.GetAllLoanAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.PayPymentLoanAcc(accNumber, amount);
+                LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
+                if (withdraw)
+                {
+                    undo = false;
+                }
+
+                if (!undo)
+                {
+                    loanAcc.UpdateTransaction(accNumber, "PayLoan", amount, loanAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+                }
+
+                return withdraw && (!undo);
+            }
+
             return false;
         }
 
@@ -68,6 +193,15 @@ namespace BankSystemEngine
         /// <param name="initAmount"> intial deposit. </param>
         public void CreateCheckingAccount(Client loggedClient, double initAmount)
         {
+            int accNumber = this.GetNextAccountNumber();
+            loggedClient.CreateCheckingAcc(accNumber, initAmount);
+            if (!this.clientAccount.ContainsKey(loggedClient))
+            {
+                this.clientAccount[loggedClient] = new HashSet<int>();
+            }
+
+            this.clientAccount[loggedClient].Add(accNumber);
+            Console.WriteLine("* Your checking account with account number:  #" + accNumber + " has been created!");
         }
 
         /// <summary>
@@ -77,6 +211,18 @@ namespace BankSystemEngine
         /// <param name="initAmount"> initial deposit. </param>
         public void CreateSavingAccount(Client loggedClient, double initAmount)
         {
+            int accNumber = this.GetNextAccountNumber();
+            bool okRegiter = loggedClient.CreateSavingAcc(accNumber, initAmount);
+            if (okRegiter)
+            {
+                if (!this.clientAccount.ContainsKey(loggedClient))
+                {
+                    this.clientAccount[loggedClient] = new HashSet<int>();
+                }
+
+                this.clientAccount[loggedClient].Add(accNumber);
+                Console.WriteLine("* Your saving account with account number:  #" + accNumber + " has been created!");
+            }
         }
 
         /// <summary>
@@ -86,6 +232,15 @@ namespace BankSystemEngine
         /// <param name="loanLimit"> loan limit. </param>
         public void CreateLoanAccount(Client loggedClient, double loanLimit)
         {
+            int accNumber = this.GetNextAccountNumber();
+            loggedClient.CreateLoanAcc(accNumber, loanLimit);
+            if (!this.clientAccount.ContainsKey(loggedClient))
+            {
+                this.clientAccount[loggedClient] = new HashSet<int>();
+            }
+
+            this.clientAccount[loggedClient].Add(accNumber);
+            Console.WriteLine("* Your loan account with account number:  #" + accNumber + " has been created!");
         }
 
         /// <summary>
@@ -94,7 +249,7 @@ namespace BankSystemEngine
         /// <returns> dict of client. </returns>
         public Dictionary<string, Client> GetAllClientAcc()
         {
-            return null;
+            return this.reg.GetAllClientAccount();
         }
 
         /// <summary>
@@ -103,7 +258,16 @@ namespace BankSystemEngine
         /// <returns>dict of employee. </returns>
         public Dictionary<string, Employee> GetAllEmplopyeeAcc()
         {
-            return null;
+            return this.reg.GetAllEmployeeAccount();
+        }
+
+        /// <summary>
+        /// Gets the current account number counter.
+        /// </summary>
+        /// <returns> account number. </returns>
+        public int GetCurrentAccountNumber()
+        {
+            return this.accNumber;
         }
 
         /// <summary>
@@ -122,7 +286,19 @@ namespace BankSystemEngine
         /// <returns> next distinct accout number. </returns>
         private int GetNextAccountNumber()
         {
-            return -1;
+            this.accNumber += 1;
+            return this.accNumber;
+        }
+
+        /// <summary>
+        /// Init the client:accnums dictionary.
+        /// </summary>
+        private void InitClientDict()
+        {
+            foreach (Client c in this.reg.GetAllClientAccount().Values)
+            {
+                this.clientAccount[c] = new HashSet<int>();
+            }
         }
     }
 }

@@ -24,7 +24,6 @@ namespace BankSystemEngine
         // storage of employee users with respect to username, so can later use in login.
         private Dictionary<string, Employee> employeeUsers;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterUser"/> class.
         /// </summary>

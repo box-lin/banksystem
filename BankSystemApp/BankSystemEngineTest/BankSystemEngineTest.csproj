@@ -40,6 +40,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestBankingCenter.cs" />
     <Compile Include="TestCheckingAccount.cs" />
     <Compile Include="TestClient.cs" />
     <Compile Include="TestDepositCommand.cs" />

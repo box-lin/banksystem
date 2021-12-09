@@ -19,7 +19,6 @@ namespace BankSystemEngine
         // specific on clients.
         private readonly double minSavingBalanceReq = 15000.00;
 
-
         /// <summary>
         /// These dictionaries to store different type of account a client composes of.
         /// </summary>
