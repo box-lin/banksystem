@@ -13,9 +13,10 @@ namespace BankSystemEngine
     /// <summary>
     /// Generic bankaccount abstract.
     /// </summary>
-    public abstract class BankAccount
+    public abstract class BankAccount : ITransaction
     {
-
+        // holds the transaction records for each account in a list.
+        private Queue<TransactionRecord> records;
         private int accNumber;
         private double accBalance;
 
@@ -35,6 +36,7 @@ namespace BankSystemEngine
             this.accBalance = 0.0;
             this.undo = new Stack<ICommand>(1);
             this.redo = new Stack<ICommand>(1);
+            this.records = new Queue<TransactionRecord>(10);
         }
 
         /// <summary>
@@ -125,6 +127,18 @@ namespace BankSystemEngine
                 c.Execute();
                 this.undo.Push(c);
             }
+        }
+
+        /// <summary>
+        /// Capture the transaction info into a TransactionRecord Class.
+        /// </summary>
+        /// <param name="accNumber"> bank account number. </param>
+        /// <param name="transactionType"> transaction type. </param>
+        /// <param name="transactionAmount"> amount transaction. </param>
+        /// <param name="balance"> balance after transaction. </param>
+        /// <param name="transactionTime"> time transaction occur. </param>
+        public void UpdateTransaction(int accNumber, string transactionType, double transactionAmount, double balance, string transactionTime)
+        {
         }
 
         /// <summary>
