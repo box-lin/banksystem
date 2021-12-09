@@ -15,15 +15,17 @@ namespace BankSystemEngine
     /// </summary>
     public class Client : User
     {
+
+        // specific on clients.
+        private readonly double minSavingBalanceReq = 15000.00;
+
+
         /// <summary>
         /// These dictionaries to store different type of account a client composes of.
         /// </summary>
         private Dictionary<int, SavingAccount> savingAccounts;
         private Dictionary<int, CheckingAccount> checkingAccounts;
         private Dictionary<int, LoanAccount> loanAccounts;
-
-        // specific on clients.
-        private double minSavingBalanceReq = 15000.00;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
