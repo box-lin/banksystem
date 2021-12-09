@@ -12,7 +12,6 @@ using NUnit.Framework;
 
 namespace BankSystemEngineTest
 {
-
     /// <summary>
     /// Class to test the checking account.
     /// </summary>

@@ -139,6 +139,23 @@ namespace BankSystemEngine
         /// <param name="transactionTime"> time transaction occur. </param>
         public void UpdateTransaction(int accNumber, string transactionType, double transactionAmount, double balance, string transactionTime)
         {
+            TransactionRecord record = new TransactionRecord(accNumber, transactionType, transactionAmount, balance, transactionTime);
+
+            if (this.records.Count >= 10)
+            {
+                this.records.Dequeue();
+            }
+
+            this.records.Enqueue(record);
+        }
+
+        /// <summary>
+        /// Get numbers of transaction data stored.
+        /// </summary>
+        /// <returns> length of records queue. </returns>
+        public int GetTransactionCount()
+        {
+            return this.records.Count;
         }
 
         /// <summary>
