@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace BankSystemEngine
 {
-
     /// <summary>
     /// A interface that required bank account to implement the transaction info.
     /// </summary>

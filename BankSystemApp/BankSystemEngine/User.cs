@@ -102,7 +102,7 @@ namespace BankSystemEngine
         }
 
         /// <summary>
-        /// Set user lastname. 
+        /// Set user lastname.
         /// </summary>
         /// <param name="lastName"> lastname. </param>
         public void SetLastName(string lastName)
@@ -122,7 +122,7 @@ namespace BankSystemEngine
         /// <summary>
         /// Set user email.
         /// </summary>
-        /// <param name="email"> email </param>
+        /// <param name="email"> email. </param>
         public void SetEmail(string email)
         {
             this.email = email;

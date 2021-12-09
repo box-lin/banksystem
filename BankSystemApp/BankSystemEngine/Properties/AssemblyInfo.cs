@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿// <copyright file="AssemblyInfo.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

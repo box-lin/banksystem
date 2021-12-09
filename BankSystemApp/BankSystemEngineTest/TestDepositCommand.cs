@@ -13,7 +13,6 @@ namespace BankSystemEngineTest
     [TestFixture]
     public class TestDepositCommand
     {
-
         /// <summary>
         /// Test Execute command.
         /// </summary>

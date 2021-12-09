@@ -56,7 +56,6 @@ namespace BankSystemEngineTest
             /// </summary>
             CheckingAccount checkAcc = new CheckingAccount(123);
             Assert.AreEqual(0.0, checkAcc.GetAccBalance());
-
         }
 
         /// <summary>

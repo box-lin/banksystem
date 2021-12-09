@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Client.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +15,12 @@ namespace BankSystemEngine
     /// </summary>
     public class Client : User
     {
-
         /// <summary>
         /// These dictionaries to store different type of account a client composes of.
         /// </summary>
         private Dictionary<int, SavingAccount> savingAccounts;
         private Dictionary<int, CheckingAccount> checkingAccounts;
         private Dictionary<int, LoanAccount> loanAccounts;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -36,7 +38,7 @@ namespace BankSystemEngine
             this.loanAccounts = new Dictionary<int, LoanAccount>();
         }
 
-        // ----------------------------------------- Accounts Creation Interfaces --------------------------------------//
+        // ------------------------------ Accounts Creation Interfaces -------------------------------//
 
         /// <summary>
         /// Create the saving account instance.
@@ -68,8 +70,8 @@ namespace BankSystemEngine
         {
         }
 
-        // ----------------------------------------------------------------------------------------------------------------------//
-        // ---------------------------------------- Account Operation Interfaces ------------------------------------------------//
+        // -------------------------------------------------------------------------------------------//
+        // ---------------------- Account Operation Interfaces ---------------------------------------//
 
         /// <summary>
         /// Client to accesing deposit in saving account.
@@ -120,7 +122,7 @@ namespace BankSystemEngine
         /// </summary>
         /// <param name="accNumber"> account number. </param>
         /// <param name="amount"> amount withdraw. </param>
-        /// <returns> can withdraw or not, </returns>
+        /// <returns> can withdraw or not. </returns>
         public bool WithdrawCheckingAcc(int accNumber, double amount)
         {
             return false;

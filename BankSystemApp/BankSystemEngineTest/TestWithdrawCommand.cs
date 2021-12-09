@@ -1,6 +1,9 @@
-﻿using BankSystemEngine;
-using NUnit.Framework;
+﻿// <copyright file="TestWithdrawCommand.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
 
+using BankSystemEngine;
+using NUnit.Framework;
 
 namespace BankSystemEngineTest
 {
@@ -10,7 +13,6 @@ namespace BankSystemEngineTest
     [TestFixture]
     public class TestWithdrawCommand
     {
-
         /// <summary>
         /// Test Execute command.
         /// </summary>

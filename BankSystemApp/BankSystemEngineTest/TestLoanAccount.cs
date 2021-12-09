@@ -13,7 +13,6 @@ namespace BankSystemEngineTest
     [TestFixture]
     public class TestLoanAccount
     {
-
         /// <summary>
         /// Test the Sucess request loan with command.
         /// </summary>
@@ -29,7 +28,6 @@ namespace BankSystemEngineTest
             // note that the acc balance for loan is the amount owed.
             Assert.AreEqual(300.0, la.GetAccBalance());
         }
-
 
         /// <summary>
         /// Test the failure of request loan with command.
@@ -55,7 +53,7 @@ namespace BankSystemEngineTest
             LoanAccount la = new LoanAccount(123, 1000.0);
 
             // suppose owed $200.00;
-            la.Deposit(200.00); 
+            la.Deposit(200.00);
 
             WithdrawCommand cmd = new WithdrawCommand(la, 200.0);
 

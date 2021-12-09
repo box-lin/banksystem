@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="TransactionRecord.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
 
 namespace BankSystemEngine
 {
@@ -44,7 +42,6 @@ namespace BankSystemEngine
                    ", \tTransaction Type: " + this.transactionType +
                    ", \tTransaction Amount: $" + this.transactionAmount
                     + ", \tBalance After: $" + this.balance + ", \tDate: " + this.transactionTime;
-
         }
     }
 }

@@ -13,7 +13,6 @@ namespace BankSystemEngineTest
     [TestFixture]
     public class TestSavingAccount
     {
-
         /// <summary>
         /// Test get account number.
         /// </summary>
@@ -52,7 +51,6 @@ namespace BankSystemEngineTest
             /// </summary>
             SavingAccount checkAcc = new SavingAccount(123);
             Assert.AreEqual(0.0, checkAcc.GetAccBalance());
-
         }
 
         /// <summary>
