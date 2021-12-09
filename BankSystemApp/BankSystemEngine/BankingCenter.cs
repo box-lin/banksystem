@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="BankingCenter.cs" company="Boxiang Lin - WSU 011601661">
+// Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +60,17 @@ namespace BankSystemEngine
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Get the Client instance by username and password.
+        /// </summary>
+        /// <param name="username"> username. </param>
+        /// <param name="password"> password. </param>
+        /// <returns> client instance. </returns>
+        public Client GetClientAcc(string username, string password)
+        {
+            return this.reg.GetClient(username);
         }
 
         /// <summary>

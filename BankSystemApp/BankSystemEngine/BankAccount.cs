@@ -150,6 +150,15 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Gets the transaction records.
+        /// </summary>
+        /// <returns> queue of records. </returns>
+        public Queue<TransactionRecord> GetTransactionRecords()
+        {
+            return this.records;
+        }
+
+        /// <summary>
         /// Get numbers of transaction data stored.
         /// </summary>
         /// <returns> length of records queue. </returns>
