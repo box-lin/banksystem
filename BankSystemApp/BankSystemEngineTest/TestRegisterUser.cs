@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-// <copyright file="TestWithdrawCommand.cs" company="Boxiang Lin - WSU 011601661">
+﻿// <copyright file="TestRegisterUser.cs" company="Boxiang Lin - WSU 011601661">
 // Copyright (c) Boxiang Lin - WSU 011601661. All rights reserved.
 // </copyright>
+
 using BankSystemEngine;
 using NUnit.Framework;
 
@@ -94,5 +89,34 @@ namespace BankSystemEngineTest
             Assert.IsFalse(reg.GetAllEmployeeAccount().ContainsKey("box"));
         }
 
+        /// <summary>
+        /// Test get client method.
+        /// </summary>
+        [Test]
+        public void TestGetClientAcc()
+        {
+            RegisterUser reg = new RegisterUser();
+            reg.RegisterClient("boxiang", "123", "Boxiang", "Lin", "boxiang.lin@wsu.edu");
+            Client client = reg.GetClient("boxiang");
+            Assert.AreEqual("123", client.GetPassWord());
+            Assert.AreEqual("Boxiang", client.GetFirstName());
+            Assert.AreEqual("Lin", client.GetLastName());
+            Assert.AreEqual("boxiang.lin@wsu.edu", client.GetEmail());
+        }
+
+        /// <summary>
+        /// Test get employee method.
+        /// </summary>
+        [Test]
+        public void TestGetEmployeeAcc()
+        {
+            RegisterUser reg = new RegisterUser();
+            reg.RegisterEmployee("boxiang", "123", "Boxiang", "Lin", "boxiang.lin@wsu.edu");
+            Employee employee = reg.GetEmployee("boxiang");
+            Assert.AreEqual("123", employee.GetPassWord());
+            Assert.AreEqual("Boxiang", employee.GetFirstName());
+            Assert.AreEqual("Lin", employee.GetLastName());
+            Assert.AreEqual("boxiang.lin@wsu.edu", employee.GetEmail());
+        }
     }
 }

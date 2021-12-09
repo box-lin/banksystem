@@ -46,6 +46,28 @@ namespace BankSystemEngine
         /// <param name="email"> email. </param>
         public void RegisterClient(string userName, string passWord, string firstName, string lastName, string email)
         {
+            bool duplicates = false;
+            if (this.uniqueUsername.Contains(userName))
+            {
+                Console.WriteLine("* < Failure >: Username has been existed in the system. Try another one!");
+                duplicates = true;
+            }
+
+            if (this.uniqueEmail.Contains(email))
+            {
+                Console.WriteLine("* < Failure >: Email has been existed in the system. Try another one!");
+                duplicates = true;
+            }
+
+            if (duplicates)
+            {
+                return;
+            }
+
+            this.uniqueEmail.Add(email);
+            this.uniqueUsername.Add(userName);
+            Client client = new Client(userName, passWord, firstName, lastName, email);
+            this.clientUsers[userName] = client;
         }
 
         /// <summary>
@@ -58,6 +80,28 @@ namespace BankSystemEngine
         /// <param name="email"> email. </param>
         public void RegisterEmployee(string userName, string passWord, string firstName, string lastName, string email)
         {
+            bool duplicates = false;
+            if (this.uniqueUsername.Contains(userName))
+            {
+                Console.WriteLine("* < Failure >: has been existed in the system. Try another one!");
+                duplicates = true;
+            }
+
+            if (this.uniqueEmail.Contains(email))
+            {
+                Console.WriteLine("* < Failure >: Email has been existed in the system. Try another one!");
+                duplicates = true;
+            }
+
+            if (duplicates)
+            {
+                return;
+            }
+
+            this.uniqueEmail.Add(email);
+            this.uniqueUsername.Add(userName);
+            Employee employee = new Employee(userName, passWord, firstName, lastName, email);
+            this.employeeUsers[userName] = employee;
         }
 
         /// <summary>
@@ -67,6 +111,26 @@ namespace BankSystemEngine
         /// <returns> loggined client. </returns>
         public Client GetClient(string username)
         {
+            if (this.clientUsers.ContainsKey(username))
+            {
+                return this.clientUsers[username];
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get employee by username.
+        /// </summary>
+        /// <param name="username"> username. </param>
+        /// <returns> logged in employee. </returns>
+        public Employee GetEmployee(string username)
+        {
+            if (this.employeeUsers.ContainsKey(username))
+            {
+                return this.employeeUsers[username];
+            }
+
             return null;
         }
 
