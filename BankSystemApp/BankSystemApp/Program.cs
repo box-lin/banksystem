@@ -164,10 +164,10 @@ namespace BankSystemApp
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(" --------------------------------- You've Logged in as Employee, " + loggedEmployee.GetFirstName() + "! --------------------------");
             sb.AppendLine("* <NOTE>                                                                                          *");
-            sb.AppendLine("* : The functionalities of employee doesn't not include in this version.                          *");
+            sb.AppendLine("* : The functionalities of employee does not include in this version.                             *");
             sb.AppendLine("* </NOTE>                                                                                         *");
-            sb.AppendLine("* Enter Any Key back to the login page                                                            *");
             sb.AppendLine("* ----------------------------------------------------------------------------------------------- *");
+            sb.AppendLine("* Enter Any Key back to the login page:                                                           *");
             Console.Write(sb.ToString());
             string op = Console.ReadLine();
             if (op != string.Empty)
