@@ -70,7 +70,18 @@ namespace BankSystemEngine
         /// <returns> found employee or not. </returns>
         public bool LoginEmployee(string username, string password)
         {
-            return false;
+            Employee employee = this.reg.GetEmployee(username);
+            if (employee == null)
+            {
+                return false;
+            }
+
+            if (password != employee.GetPassWord())
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
