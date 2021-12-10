@@ -1,10 +1,8 @@
-# BankSystemApp
+# BankSystemApp (Console Application in C#)
 
 `WSU ID: 011601661`
 
 `Name: Boxiang Lin`
-
-1. bug: create account make sure amount > 0, no negative accepted.
 
 ## Features
 
@@ -32,11 +30,23 @@
 
 #### Transaction Category
 
-- Clients able to deposit money into their own Bank Accounts (`Saving account`, `Checking account`, `Loan account`).
-- Clients able to withdraw money from their own Bank Accounts (`Saving account`, `Checking account`, `Loan account`).
-- Clients able to transfer money to their own, or other clients, Bank Accounts (`Saving account`, `Checking account`, `Loan account`).
+- Clients able to **deposit money** into their own Bank Accounts (`Saving account`, `Checking account`).
+- Clients able to **withdraw money** from their own Bank Accounts (`Saving account`, `Checking account`).
+- Clients able to **borrow loan** from their own Bank Accounts (`Loan account`).
+- Clients able to **make payment** into their own Bank Accounts (`Loan account`).
+- Clients able to **transfer money** to their own, or other clients, Bank Accounts (`Saving account`, `Checking account`, `Loan account`).
 - Each account stores a collection of **TEN** most recent transaction information. 
-- Clients able to **UNDO** the transaction within 10 seconds after the transaction made. **(Redo available once undo made, undo available again until redo made, so on so forth, until 10 seconds ended. )**
+- Clients able to **UNDO** the transaction within 10 seconds after the transaction made. **(Redo available once undo made, undo available again until redo made, so on so forth, until 10 seconds ended).**
+
+
+
+#### Few Restrictions For Transaction
+
+- Clients **not able** to withdraw money more than account balance (`Checking account`).
+- Clients **not able** to withdraw money that will result in account balance less than **minimum balance requirement**(`Saving account`).
+- Clients **not able** to borrow loan that will exceeds the **loan limit** (`Loan account`).
+- Clients **not able** to make payment that will overpays the **amount owed** (`Loan account`).
+- Account **will not** stored the transaction record for undo.
 
 
 
@@ -44,14 +54,15 @@
 
 #### Client:
 
-- **Username:** `boxiang`, **Password: **123
-- **Username:** `sam`, **Password: ** `123`
+- **Username:** `boxiang`, **Password:**123
 
+- **Username:** `sam`, **Password:** `123`
 
+  
 
 #### Employee
 
-- **Username: **`john`, **Password: **`321`
+- **Username:**`john`, **Password:**`321`
 
 
 
