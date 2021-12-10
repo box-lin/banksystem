@@ -74,6 +74,57 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Transfer money from one account to another.
+        /// </summary>
+        /// <param name="loggedClient"> logged in client. </param>
+        /// <param name="myAccNumber"> client's account number. </param>
+        /// <param name="targetAccNumber"> receiver's account number. </param>
+        /// <param name="transferAmount"> transfer amount. </param>
+        /// <returns> can transfer or not. </returns>
+        public bool MoneyTransfer(Client loggedClient, int myAccNumber, int targetAccNumber, double transferAmount)
+        {
+            bool undo = false;
+
+            // 1) check if the targetAccNumber belongs to some client.
+            Client receiver = this.GetClientByAccountNum(targetAccNumber);
+
+            if (receiver == null)
+            {
+                Console.WriteLine("* <Failure>: The account doesn't exist!");
+                return false;
+            }
+
+            // 2) such receiver's account exist in system then check for the withdraw condition (if sufficient amount in packet).
+            BankAccount transferOutAcc = this.TransferOut(loggedClient, myAccNumber, transferAmount);
+
+            if (transferOutAcc == null)
+            {
+                Console.WriteLine("* <Failure>: You don't have sufficient balance for transfer!");
+                return false;
+            }
+
+            // 3) account exist and balance enough, proceed transfer process.
+            BankAccount transferInAcc = this.TransferIn(receiver, targetAccNumber, transferAmount);
+
+            if (transferOutAcc != null && transferInAcc != null)
+            {
+                // perform redo undo.
+                undo = this.RunUndoRedoTransferCommand(transferOutAcc, transferInAcc);
+            }
+
+            // if undo, nothing really happen, transfer transaction didnt made.
+            if (undo)
+            {
+                return false;
+            }
+
+            // not undo, we add record.
+            transferOutAcc.UpdateTransaction(myAccNumber, "Transfer Out", transferAmount, transferOutAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+            transferInAcc.UpdateTransaction(targetAccNumber, "Transfer In", transferAmount, transferInAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+            return true;
+        }
+
+        /// <summary>
         /// Account deposite wrapper.
         /// </summary>
         /// <param name="loggedClient"> logined client. </param>
@@ -134,7 +185,7 @@ namespace BankSystemEngine
                 return deposited && (!undo);
             }
 
-            Console.WriteLine("* <Failure>: The amount doesn't exist!");
+            Console.WriteLine("* <Failure>: The account doesn't exist!");
             return false;
         }
 
@@ -346,6 +397,7 @@ namespace BankSystemEngine
                 }
                 else
                 {
+                    // if user enter q, or something else we just end the thread and process the transaction.
                     timer.Abort();
                     return undo;
                 }
@@ -362,7 +414,7 @@ namespace BankSystemEngine
         {
             for (int i = 10; i > 0; i--)
             {
-                Thread.Sleep(999);
+                Thread.Sleep(1000);
                 if (acc.GetRedoStackSize() > 0)
                 {
                     Console.Write("\r* Your can redo last transaction by 'r' within " + i + " seconds or 'q' to quit: ");
@@ -372,6 +424,170 @@ namespace BankSystemEngine
                     Console.Write("\r* Your can undo last transaction by 'u' within " + i + " seconds or 'q' to quit: ");
                 }
             }
+
+            Console.WriteLine();
+            Console.WriteLine("* Session ended, ---------------------------------> press q key to exist!");
+        }
+
+        /// <summary>
+        /// Helper to get client instance by account number.
+        /// </summary>
+        /// <param name="accNum"> account number. </param>
+        /// <returns> client. </returns>
+        private Client GetClientByAccountNum(int accNum)
+        {
+            foreach (Client c in this.clientAccount.Keys)
+            {
+                if (this.clientAccount[c].Contains(accNum))
+                {
+                    return c;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Only use for transfer.
+        /// </summary>
+        /// <param name="loggedClient"> logged client. </param>
+        /// <param name="accNumber"> account number. </param>
+        /// <param name="amount"> amount. </param>
+        /// <returns> can transfer out or not. </returns>
+        private BankAccount TransferOut(Client loggedClient, int accNumber, double amount)
+        {
+            bool withdraw = false;
+            if (loggedClient.GetAllSavingAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.WithdrawSavingAcc(accNumber, amount);
+                SavingAccount saveAcc = loggedClient.GetAllSavingAccount()[accNumber];
+                TransactionRecord record = new TransactionRecord(accNumber, "Transfer out", amount, saveAcc.GetAccBalance(), DateTime.Now.ToLocalTime().ToString());
+
+                if (withdraw)
+                {
+                    return saveAcc;
+                }
+            }
+            else if (loggedClient.GetAllCheckingAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.WithdrawCheckingAcc(accNumber, amount);
+                CheckingAccount checkAcc = loggedClient.GetAllCheckingAccount()[accNumber];
+
+                if (withdraw)
+                {
+                    return checkAcc;
+                }
+            }
+            else if (loggedClient.GetAllLoanAccount().ContainsKey(accNumber))
+            {
+                withdraw = loggedClient.PayPymentLoanAcc(accNumber, amount);
+                LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
+                if (withdraw)
+                {
+                    return loanAcc;
+                }
+            }
+
+            Console.WriteLine("* <Failure>: The account doesn't exist!");
+            return null;
+        }
+
+        private BankAccount TransferIn(Client receiver, int accNumber, double amount)
+        {
+            bool deposited = false;
+            if (receiver.GetAllSavingAccount().ContainsKey(accNumber))
+            {
+                deposited = receiver.DepositSavingAcc(accNumber, amount);
+                SavingAccount saveAcc = receiver.GetAllSavingAccount()[accNumber];
+                if (deposited)
+                {
+                    return saveAcc;
+                }
+            }
+            else if (receiver.GetAllCheckingAccount().ContainsKey(accNumber))
+            {
+                deposited = receiver.DepositCheckingAcc(accNumber, amount);
+                CheckingAccount checkAcc = receiver.GetAllCheckingAccount()[accNumber];
+                if (deposited)
+                {
+                    return checkAcc;
+                }
+            }
+            else if (receiver.GetAllLoanAccount().ContainsKey(accNumber))
+            {
+                deposited = receiver.RequestLoanLoanAcc(accNumber, amount); // balance here is what owed.
+                LoanAccount loanAcc = receiver.GetAllLoanAccount()[accNumber];
+                if (deposited)
+                {
+                    return loanAcc;
+                }
+            }
+
+            Console.WriteLine("* <Failure>: The account doesn't exist!");
+            return null;
+        }
+
+        /// <summary>
+        /// UndoRedo command for transfer.
+        /// </summary>
+        /// <param name="senderAcc"> sender account. </param>
+        /// <param name="receiverAcc"> receiver account. </param>
+        /// <returns> can undo or not. </returns>
+        private bool RunUndoRedoTransferCommand(BankAccount senderAcc, BankAccount receiverAcc)
+        {
+            // seperate thread to run the counter of 10 seconds.
+            Thread timer = new Thread(() => this.TransferRunTimer(senderAcc, receiverAcc));
+            string command = string.Empty;
+            bool undo = false;
+            timer.Start();
+            while (timer.IsAlive)
+            {
+                command = Console.ReadLine();
+                if (command == "r")
+                {
+                    senderAcc.RunRedoCommand();
+                    receiverAcc.RunRedoCommand();
+                    undo = false;
+                }
+                else if (command == "u")
+                {
+                    senderAcc.RunUndoCommand();
+                    receiverAcc.RunUndoCommand();
+                    undo = true;
+                }
+                else
+                {
+                    // if user enter q, or something else we just end the thread and process the transaction.
+                    timer.Abort();
+                    return undo;
+                }
+            }
+
+            return undo;
+        }
+
+        /// <summary>
+        /// Use for transfer timer of redo/undo.
+        /// </summary>
+        /// <param name="sender"> sender account. </param>
+        /// <param name="receiver"> receiver account. </param>
+        private void TransferRunTimer(BankAccount sender, BankAccount receiver)
+        {
+            for (int i = 10; i > 0; i--)
+            {
+                Thread.Sleep(1000);
+                if (sender.GetRedoStackSize() > 0 && receiver.GetRedoStackSize() > 0)
+                {
+                    Console.Write("\r* Your can redo the transfer transaction by 'r' within " + i + " seconds or 'q' to quit: ");
+                }
+                else if (sender.GetUndoStackSize() > 0 && receiver.GetUndoStackSize() > 0)
+                {
+                    Console.Write("\r* Your can undo the transfer transaction  by 'u' within " + i + " seconds or 'q' to quit: ");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("* Session ended, ---------------------------------> press q key to exist!");
         }
     }
 }

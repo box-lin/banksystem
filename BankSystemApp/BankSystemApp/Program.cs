@@ -188,7 +188,7 @@ namespace BankSystemApp
             }
             else if (op == "9")
             {
-                // TODO: account many transfer.
+                this.TransferFundMenu(loggedClient);
             }
             else
             {
@@ -391,12 +391,18 @@ namespace BankSystemApp
         {
             Console.Write("* Please enter your account number: ");
             int myAccNumber = int.Parse(Console.ReadLine());
-            Console.Write("* Please enter the transferee account number: ");
+            Console.Write("* Please enter the receiver's account number: ");
             int targerAccNumber = int.Parse(Console.ReadLine());
             Console.Write("* Please enter the amount you want to transfer: ");
             double transferAmount = double.Parse(Console.ReadLine());
+            bool success = this.bc.MoneyTransfer(loggedClient, myAccNumber, targerAccNumber, transferAmount);
+            if (success)
+            {
+                Console.WriteLine("The amount $" + transferAmount + " has been sucessfullt transfer from Account # " + myAccNumber +
+                    " into the Account #" + targerAccNumber);
+            }
 
-            // TODO: need to implement functionalities in BC.
+            this.ClientOpCycle(loggedClient);
         }
 
         /// <summary>
