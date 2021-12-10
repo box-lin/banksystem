@@ -64,6 +64,18 @@ namespace BankSystemApp
                 // TODO: employee login.
                 string username = this.ShowLoginUsernameMenu();
                 string password = this.ShowLoginPasswordMenu();
+                Console.WriteLine();
+                bool isOkLogin = this.EmployeeLoginVerify(username, password);
+                if (!isOkLogin)
+                {
+                    Console.WriteLine();
+                    this.ShowUserMenu();
+                }
+                else
+                {
+                    Employee loggedEmployee = this.bc.GetEmployeeAcc(username, password);
+                    this.ShowEmployeeMenu(loggedEmployee);
+                }
             }
             else
             {
@@ -142,6 +154,7 @@ namespace BankSystemApp
             sb.AppendLine("* 7. Type 7 to make payment to your loan account                                                  *");
             sb.AppendLine("* 8. Type 8 to borrow from your loan account                                                      *");
             sb.AppendLine("* 9. Type 9 to transfer funds                                                                     *");
+            sb.AppendLine("* 0. Type 0 to login page                                                                         *");
             Console.Write(sb.ToString());
             string op = Console.ReadLine();
             this.DisplayClientSelectedOpMenu(op, loggedClient);
@@ -154,7 +167,11 @@ namespace BankSystemApp
         /// <param name="loggedClient"> loggied client. </param>
         private void DisplayClientSelectedOpMenu(string op, Client loggedClient)
         {
-            if (op == "1")
+            if (op == "0")
+            {
+                this.Run();
+            }
+            else if (op == "1")
             {
                 this.ViewAllAccountMenu(loggedClient);
             }
@@ -309,9 +326,9 @@ namespace BankSystemApp
         /// <param name="loggedClient"> logged client. </param>
         private void AccountDepositMenu(Client loggedClient)
         {
-            Console.Write("* Please the account number: ");
+            Console.Write("* Please the account number: #");
             int accNumber = int.Parse(Console.ReadLine());
-            Console.Write("* Please enter the deposit amount: ");
+            Console.Write("* Please enter the deposit amount: $");
             double depositAmount = double.Parse(Console.ReadLine());
             bool success = this.bc.AccountDeposit(loggedClient, accNumber, depositAmount);
             if (success)
@@ -329,7 +346,7 @@ namespace BankSystemApp
         /// <param name="loggedClient"> logged menu. </param>
         private void AccountWithdrawMenu(Client loggedClient)
         {
-            Console.Write("* Please the account number: ");
+            Console.Write("* Please the account number: #");
             int accNumber = int.Parse(Console.ReadLine());
             Console.Write("* Please enter the withdraw amount: $");
             double withdrawAmount = double.Parse(Console.ReadLine());
@@ -349,7 +366,7 @@ namespace BankSystemApp
         /// <param name="loggedClient"> logged client. </param>
         private void LoanBorrowMenu(Client loggedClient)
         {
-            Console.Write("* Please the account number: ");
+            Console.Write("* Please the account number: #");
             int accNumber = int.Parse(Console.ReadLine());
             Console.Write("* Please enter the amount you want to borrow from the account: $");
             double borrowAmount = double.Parse(Console.ReadLine());
@@ -369,7 +386,7 @@ namespace BankSystemApp
         /// <param name="loggedClient"> logged client. </param>
         private void PayLoanMenu(Client loggedClient)
         {
-            Console.Write("* Please the account number: ");
+            Console.Write("* Please the account number: #");
             int accNumber = int.Parse(Console.ReadLine());
             Console.Write("* Please enter the amount you want pay to your loan account: $");
             double payAmount = double.Parse(Console.ReadLine());
@@ -389,11 +406,11 @@ namespace BankSystemApp
         /// <param name="loggedClient"> logged client. </param>
         private void TransferFundMenu(Client loggedClient)
         {
-            Console.Write("* Please enter your account number: ");
+            Console.Write("* Please enter your account number: #");
             int myAccNumber = int.Parse(Console.ReadLine());
-            Console.Write("* Please enter the receiver's account number: ");
+            Console.Write("* Please enter the receiver's account number: #");
             int targerAccNumber = int.Parse(Console.ReadLine());
-            Console.Write("* Please enter the amount you want to transfer: ");
+            Console.Write("* Please enter the amount you want to transfer: $");
             double transferAmount = double.Parse(Console.ReadLine());
             bool success = this.bc.MoneyTransfer(loggedClient, myAccNumber, targerAccNumber, transferAmount);
             if (success)
@@ -401,7 +418,7 @@ namespace BankSystemApp
                 Console.WriteLine("The amount $" + transferAmount + " has been sucessfullt transfer from Account # " + myAccNumber +
                     " into the Account #" + targerAccNumber);
             }
-
+            Console.WriteLine();
             this.ClientOpCycle(loggedClient);
         }
 

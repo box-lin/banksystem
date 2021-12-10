@@ -48,6 +48,29 @@ namespace BankSystemEngineTest
         }
 
         /// <summary>
+        /// Test success login determination.
+        /// </summary>
+        [Test]
+        public void TestSuccessLoginEmployee()
+        {
+            BankingCenter bc = new BankingCenter();
+            bool login = bc.LoginEmployee("john", "321");
+            Assert.IsTrue(login);
+        }
+
+        /// <summary>
+        /// Test failed login determination.
+        /// </summary>
+        [Test]
+        public void TestFailedLoginEmployee()
+        {
+            BankingCenter bc = new BankingCenter();
+            bool login = bc.LoginEmployee("box", "123");
+            Assert.IsFalse(login);
+        }
+
+
+        /// <summary>
         /// Test create cheking account wrapper.
         /// </summary>
         [Test]

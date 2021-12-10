@@ -41,7 +41,7 @@ namespace BankSystemEngine
         }
 
         /// <summary>
-        /// Determine if the input username and password correctness and existence.
+        /// Determine if the input username and password correctness and existence for client instance.
         /// </summary>
         /// <param name="username"> username. </param>
         /// <param name="password"> password. </param>
@@ -60,6 +60,17 @@ namespace BankSystemEngine
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Determine if the input username and password correctness and existence for employee instance.
+        /// </summary>
+        /// <param name="username"> username. </param>
+        /// <param name="password"> password. </param>
+        /// <returns> found employee or not. </returns>
+        public bool LoginEmployee(string username, string password)
+        {
+            return false;
         }
 
         /// <summary>
@@ -448,7 +459,7 @@ namespace BankSystemEngine
         }
 
         /// <summary>
-        /// Only use for transfer.
+        /// This handles the withdraw from sender's account (similar to accountwithdraw).
         /// </summary>
         /// <param name="loggedClient"> logged client. </param>
         /// <param name="accNumber"> account number. </param>
@@ -492,6 +503,13 @@ namespace BankSystemEngine
             return null;
         }
 
+        /// <summary>
+        /// Handles the deposit for receiver account (similar to account deposit).
+        /// </summary>
+        /// <param name="receiver"> receiver instance. </param>
+        /// <param name="accNumber"> receiver account number. </param>
+        /// <param name="amount"> amount transfer. </param>
+        /// <returns> can transfer in to a receiver account or not. </returns>
         private BankAccount TransferIn(Client receiver, int accNumber, double amount)
         {
             bool deposited = false;
