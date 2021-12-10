@@ -49,6 +49,20 @@ namespace BankSystemEngine
         /// </summary>
         public void WriteAccountsToLocal()
         {
+            using (StreamWriter sw = new StreamWriter("accounts.txt"))
+            {
+                sw.WriteLine("Client Accounts See Blow: ");
+                foreach (Client client in this.reg.GetAllClientAccount().Values)
+                {
+                    sw.WriteLine(client);
+                }
+
+                sw.WriteLine("Employee Accounts See Below: ");
+                foreach (Employee employee in this.reg.GetAllEmployeeAccount().Values)
+                {
+                    sw.WriteLine(employee);
+                }
+            }
         }
 
         /// <summary>

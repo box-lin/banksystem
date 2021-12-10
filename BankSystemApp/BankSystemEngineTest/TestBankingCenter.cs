@@ -115,8 +115,17 @@ namespace BankSystemEngineTest
             BankingCenter bc = new BankingCenter();
             var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             path = path.Substring(6);
-            StreamReader sr = new StreamReader(path + "/accounts.txt");
-            Assert.IsTrue(sr != null);
+            bool nonExist = false;
+            try
+            {
+                StreamReader sr = new StreamReader(path + "/accounts.txt");
+            }
+            catch
+            {
+                nonExist = true;
+            }
+
+            Assert.IsTrue(nonExist);
         }
 
         /*Due to the design that required user input (console.readline()) for undo and redo command inside of these method,
