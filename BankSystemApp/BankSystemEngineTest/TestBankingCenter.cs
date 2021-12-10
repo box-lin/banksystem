@@ -4,6 +4,7 @@
 
 using BankSystemEngine;
 using NUnit.Framework;
+using System.IO;
 
 namespace BankSystemEngineTest
 {
@@ -69,7 +70,6 @@ namespace BankSystemEngineTest
             Assert.IsFalse(login);
         }
 
-
         /// <summary>
         /// Test create cheking account wrapper.
         /// </summary>
@@ -107,6 +107,21 @@ namespace BankSystemEngineTest
         }
 
         /// <summary>
+        /// Test the wrote file in diretory of BankSystemApp project.
+        /// </summary>
+        [Test]
+        public void TestFailWriteAccountToLocal()
+        {
+            BankingCenter bc = new BankingCenter();
+            var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            path = path.Substring(6);
+            StreamReader sr = new StreamReader(path + "/accounts.txt");
+            Assert.IsTrue(sr != null);
+        }
+
+        /*Due to the design that required user input (console.readline()) for undo and redo command inside of these method,
+         * now comment them out.
+        /// <summary>
         /// Test account deposit wrapper.
         /// </summary>
         [Test]
@@ -132,6 +147,6 @@ namespace BankSystemEngineTest
             int accNum = bc.GetCurrentAccountNumber();
             bc.AccountWithdraw(client, accNum, 500.0);
             Assert.AreEqual(bc.GetAllClientAcc()["boxiang"].GetAllCheckingAccount()[accNum].GetAccBalance(), 15500.0);
-        }
+        }*/
     }
 }

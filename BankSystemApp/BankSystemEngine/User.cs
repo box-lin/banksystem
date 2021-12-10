@@ -127,5 +127,17 @@ namespace BankSystemEngine
         {
             this.email = email;
         }
+
+        /// <summary>
+        /// Overrides the tostring.
+        /// </summary>
+        /// <returns> info about the user. </returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("username: " + this.userName);
+            sb.AppendLine("password: " + this.passWord);
+            return sb.ToString();
+        }
     }
 }

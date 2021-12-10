@@ -130,7 +130,7 @@ namespace BankSystemApp
             bool clientFounded = this.bc.LoginClient(username, password);
             if (!clientFounded)
             {
-                Console.WriteLine(">>Error: Username OR Password Incorrect!                                                              *");
+                Console.WriteLine(">>Error: Username OR Password Incorrect!                                                          *");
                 return false;
             }
 
@@ -148,7 +148,7 @@ namespace BankSystemApp
             bool employeeFounded = this.bc.LoginEmployee(username, password);
             if (!employeeFounded)
             {
-                Console.WriteLine(">>Error: Username OR Password Incorrect!                                                              *");
+                Console.WriteLine(">>Error: Username OR Password Incorrect!                                                          *");
                 return false;
             }
 
@@ -457,6 +457,7 @@ namespace BankSystemApp
                 Console.WriteLine("The amount $" + transferAmount + " has been sucessfullt transfer from Account # " + myAccNumber +
                     " into the Account #" + targerAccNumber);
             }
+
             Console.WriteLine();
             this.ClientOpCycle(loggedClient);
         }

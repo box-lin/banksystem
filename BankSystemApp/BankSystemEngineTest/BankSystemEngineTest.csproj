@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\BankSystemEngineTest.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +61,10 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankSystemApp\BankSystemApp.csproj">
+      <Project>{f4df4459-5f5f-497f-984c-3d2ca150f200}</Project>
+      <Name>BankSystemApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankSystemEngine\BankSystemEngine.csproj">
       <Project>{26610a70-11ed-4573-8b8d-249c8c01ef49}</Project>
       <Name>BankSystemEngine</Name>

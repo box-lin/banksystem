@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -36,8 +37,18 @@ namespace BankSystemEngine
             // create some accounts.
             this.DummyRegistration();
 
+            // write dummy account to local txt.
+            this.WriteAccountsToLocal();
+
             // init client to acc num dictionary.
             this.InitClientDict();
+        }
+
+        /// <summary>
+        /// This write the accoun information into a txt.
+        /// </summary>
+        public void WriteAccountsToLocal()
+        {
         }
 
         /// <summary>
