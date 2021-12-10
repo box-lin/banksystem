@@ -52,9 +52,11 @@
 
 ## Dummy Accounts
 
+The existing username and password information can be founded at this directory `...\BankSystemApp\BankSystemApp\bin\Debug` , a file named `accounts.txt`.
+
 #### Client:
 
-- **Username:** `boxiang`, **Password:**123
+- **Username:** `boxiang`, **Password:** `123`
 
 - **Username:** `sam`, **Password:** `123`
 

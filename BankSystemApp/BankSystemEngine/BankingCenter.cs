@@ -141,6 +141,11 @@ namespace BankSystemEngine
         /// <returns> can transfer or not. </returns>
         public bool MoneyTransfer(Client loggedClient, int myAccNumber, int targetAccNumber, double transferAmount)
         {
+            if (this.MoneyisNagative(transferAmount))
+            {
+                return false;
+            }
+
             bool undo = false;
 
             // 1) check if the targetAccNumber belongs to some client.
@@ -191,6 +196,11 @@ namespace BankSystemEngine
         /// <returns> can deposit or not. </returns>
         public bool AccountDeposit(Client loggedClient, int accNumber, double amount)
         {
+            if (this.MoneyisNagative(amount))
+            {
+                return false;
+            }
+
             bool deposited = false;
             bool undo = false;
 
@@ -256,6 +266,11 @@ namespace BankSystemEngine
         /// <returns> can withdraw or not. </returns>
         public bool AccountWithdraw(Client loggedClient, int accNumber, double amount)
         {
+            if (this.MoneyisNagative(amount))
+            {
+                return false;
+            }
+
             bool withdraw = false;
             bool undo = false;
             if (loggedClient.GetAllSavingAccount().ContainsKey(accNumber))
@@ -320,6 +335,11 @@ namespace BankSystemEngine
         /// <param name="initAmount"> intial deposit. </param>
         public void CreateCheckingAccount(Client loggedClient, double initAmount)
         {
+            if (this.MoneyisNagative(initAmount))
+            {
+                return;
+            }
+
             int accNumber = this.GetNextAccountNumber();
             loggedClient.CreateCheckingAcc(accNumber, initAmount);
             if (!this.clientAccount.ContainsKey(loggedClient))
@@ -338,6 +358,11 @@ namespace BankSystemEngine
         /// <param name="initAmount"> initial deposit. </param>
         public void CreateSavingAccount(Client loggedClient, double initAmount)
         {
+            if (this.MoneyisNagative(initAmount))
+            {
+                return;
+            }
+
             int accNumber = this.GetNextAccountNumber();
             bool okRegiter = loggedClient.CreateSavingAcc(accNumber, initAmount);
             if (okRegiter)
@@ -359,6 +384,11 @@ namespace BankSystemEngine
         /// <param name="loanLimit"> loan limit. </param>
         public void CreateLoanAccount(Client loggedClient, double loanLimit)
         {
+            if (this.MoneyisNagative(loanLimit))
+            {
+                return;
+            }
+
             int accNumber = this.GetNextAccountNumber();
             loggedClient.CreateLoanAcc(accNumber, loanLimit);
             if (!this.clientAccount.ContainsKey(loggedClient))
@@ -514,6 +544,11 @@ namespace BankSystemEngine
         /// <returns> can transfer out or not. </returns>
         private BankAccount TransferOut(Client loggedClient, int accNumber, double amount)
         {
+            if (this.MoneyisNagative(amount))
+            {
+                return null;
+            }
+
             bool withdraw = false;
             if (loggedClient.GetAllSavingAccount().ContainsKey(accNumber))
             {
@@ -559,6 +594,11 @@ namespace BankSystemEngine
         /// <returns> can transfer in to a receiver account or not. </returns>
         private BankAccount TransferIn(Client receiver, int accNumber, double amount)
         {
+            if (this.MoneyisNagative(amount))
+            {
+                return null;
+            }
+
             bool deposited = false;
             if (receiver.GetAllSavingAccount().ContainsKey(accNumber))
             {
@@ -653,6 +693,27 @@ namespace BankSystemEngine
 
             Console.WriteLine();
             Console.WriteLine("* Session ended, ---------------------------------> press q key to exist!");
+        }
+
+        /// <summary>
+        /// Ensure that the input amount is not negative.
+        /// </summary>
+        /// <param name="amount"> amount. </param>
+        /// <returns> is negative or not. </returns>
+        private bool MoneyisNagative(double amount)
+        {
+            if (amount < 0)
+            {
+                Console.WriteLine("* <Failure>: Amount cannot be nagative!");
+                return true;
+            }
+            else if (amount == 0)
+            {
+                Console.WriteLine("* <Failure>: ZERO Amount make no sense!");
+                return true;
+            }
+
+            return false;
         }
     }
 }
