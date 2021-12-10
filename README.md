@@ -23,7 +23,7 @@
 - Clients able to possess three types of, and multiple ones of, **Bank Account** - `Saving account`, `Checking account`, and `Loan account`.
 
 - Clients able to open the `checking account` with an **initial deposit (amount > $0)**.
-- Clients able to open the `saving account` with an **initial deposit (amount > $15,000)** so to adhere of default minimum balance requirement in a range of saving account lifetime.
+- Clients able to open the `saving account` with an **initial deposit (amount >= $15,000)** so to adhere of default minimum balance requirement in a range of saving account lifetime.
 - Clients able to open the `loan account` with a **loan limit ( greater than $0)**.
 
 

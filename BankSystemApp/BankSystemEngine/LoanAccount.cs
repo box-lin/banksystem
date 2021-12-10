@@ -84,6 +84,15 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Gets the loan limit in string.
+        /// </summary>
+        /// <returns> loan limit. </returns>
+        public string GetLoanLimit()
+        {
+            return this.loanLimit.ToString();
+        }
+
+        /// <summary>
         /// Thrid Party Interface: interest accumulates from borrowed amount.
         /// </summary>
         private void InterestAccumulation()

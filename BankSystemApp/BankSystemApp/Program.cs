@@ -307,7 +307,7 @@ namespace BankSystemApp
             foreach (var acc in loggedClient.GetAllLoanAccount())
             {
                 Console.WriteLine("[*] Account Type: Loan, \t" + "Account Number: [#" + acc.Value.GetAccNumber() + "], \tAmount Owed: $" + acc.Value.GetAccBalance()
-                    + ", \tInterest Rate: " + acc.Value.GetAccountInterestRate());
+                    + ", \tInterest Rate: " + acc.Value.GetAccountInterestRate() +", \tLoan Limit: $" + acc.Value.GetLoanLimit());
                 foreach (TransactionRecord tr in acc.Value.GetTransactionRecords())
                 {
                     Console.WriteLine(tr);

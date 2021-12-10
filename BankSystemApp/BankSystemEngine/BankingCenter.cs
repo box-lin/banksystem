@@ -573,7 +573,7 @@ namespace BankSystemEngine
             }
             else if (loggedClient.GetAllLoanAccount().ContainsKey(accNumber))
             {
-                withdraw = loggedClient.PayPymentLoanAcc(accNumber, amount);
+                withdraw = loggedClient.RequestLoanLoanAcc(accNumber, amount);
                 LoanAccount loanAcc = loggedClient.GetAllLoanAccount()[accNumber];
                 if (withdraw)
                 {
@@ -620,7 +620,7 @@ namespace BankSystemEngine
             }
             else if (receiver.GetAllLoanAccount().ContainsKey(accNumber))
             {
-                deposited = receiver.RequestLoanLoanAcc(accNumber, amount); // balance here is what owed.
+                deposited = receiver.PayPymentLoanAcc(accNumber, amount); // balance here is what owed.
                 LoanAccount loanAcc = receiver.GetAllLoanAccount()[accNumber];
                 if (deposited)
                 {

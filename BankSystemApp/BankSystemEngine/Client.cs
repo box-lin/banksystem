@@ -55,7 +55,7 @@ namespace BankSystemEngine
             bool okRule = this.EnsureMinBalanceRequirement(initialDeposit);
             if (!okRule)
             {
-                Console.WriteLine("* < Failure >: Fail to open saving account, initial deposit must greater than $" + this.minSavingBalanceReq);
+                Console.WriteLine("* < Failure >: Fail to open saving account, initial deposit must at least $" + this.minSavingBalanceReq);
                 return false;
             }
 
@@ -147,7 +147,7 @@ namespace BankSystemEngine
             bool okRule = this.EnsureMinBalanceRequirement(acc.GetAccBalance() - amount);
             if (!okRule)
             {
-                Console.WriteLine("* < Failure >: Fail to withdraw, saving account balance must maintain greater than $" + this.minSavingBalanceReq);
+                Console.WriteLine("* < Failure >: Fail to withdraw, saving account balance must maintain at least $" + this.minSavingBalanceReq);
                 return false;
             }
 
