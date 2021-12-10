@@ -46,7 +46,7 @@
 - Clients **not able** to withdraw money that will result in account balance less than **minimum balance requirement**(`Saving account`).
 - Clients **not able** to borrow loan that will exceeds the **loan limit** (`Loan account`).
 - Clients **not able** to make payment that will overpays the **amount owed** (`Loan account`).
-- Account **will not** stored the transaction record for undo (`if transaction has been multiple undo and redo during the 10 seconds, the transaction will be stored if that transaction eventually is not trivial "amount changed"`).
+- Account **will not** stored the transaction record for undo **BUT** (`if transaction has been multiple undo and redo during the 10 seconds, the original transaction will be stored if that these sort of activities eventually leads to the non-trivial outcome "balance affected".`).
 
 
 
@@ -67,8 +67,6 @@ The existing username and password information can be founded at this directory 
 - **Username:**`john`, **Password:**`321`
 
 
-
- 
 
 
 
