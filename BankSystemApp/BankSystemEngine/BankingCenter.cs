@@ -96,6 +96,17 @@ namespace BankSystemEngine
         }
 
         /// <summary>
+        /// Gets the employee instance.
+        /// </summary>
+        /// <param name="username"> username. </param>
+        /// <param name="password"> password. </param>
+        /// <returns> employee instance. </returns>
+        public Employee GetEmployeeAcc(string username, string password)
+        {
+            return this.reg.GetEmployee(username);
+        }
+
+        /// <summary>
         /// Transfer money from one account to another.
         /// </summary>
         /// <param name="loggedClient"> logged in client. </param>

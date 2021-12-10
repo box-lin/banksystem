@@ -51,7 +51,7 @@ namespace BankSystemApp
                 if (!isOkLogin)
                 {
                     Console.WriteLine();
-                    this.ShowUserMenu();
+                    this.Run();
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace BankSystemApp
                 if (!isOkLogin)
                 {
                     Console.WriteLine();
-                    this.ShowUserMenu();
+                    this.Run();
                 }
                 else
                 {
@@ -135,6 +135,45 @@ namespace BankSystemApp
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Verify the username and password first for emplpyee.
+        /// </summary>
+        /// <param name="username"> username. </param>
+        /// <param name="password"> password. </param>
+        /// <returns> can login or not. </returns>
+        private bool EmployeeLoginVerify(string username, string password)
+        {
+            bool employeeFounded = this.bc.LoginEmployee(username, password);
+            if (!employeeFounded)
+            {
+                Console.WriteLine(">>Error: Username OR Password Incorrect!                                                              *");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// To show the employee menu page.
+        /// </summary>
+        /// <param name="loggedEmployee"> logged emploee. </param>
+        private void ShowEmployeeMenu(Employee loggedEmployee)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(" --------------------------------- You've Logged in as Employee, " + loggedEmployee.GetFirstName() + "! --------------------------");
+            sb.AppendLine("* <NOTE>                                                                                          *");
+            sb.AppendLine("* : The functionalities of employee doesn't not include in this version.                          *");
+            sb.AppendLine("* </NOTE>                                                                                         *");
+            sb.AppendLine("* Enter Any Key back to the login page                                                            *");
+            sb.AppendLine("* ----------------------------------------------------------------------------------------------- *");
+            Console.Write(sb.ToString());
+            string op = Console.ReadLine();
+            if (op != string.Empty)
+            {
+                this.Run();
+            }
         }
 
         /// <summary>
